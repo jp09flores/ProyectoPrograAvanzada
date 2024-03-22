@@ -1,0 +1,64 @@
+﻿@model ProyectoPrograAvanzada.Entidades.Reservas
+@{
+    ViewBag.Title = "RegistroReservas";
+}
+
+
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Habitaciones</h6>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                            @if (ViewBag.MsjPantalla != null)
+                            {
+                                <div class="alert alert-warning" role="alert" style="text-align:center">
+                                    @ViewBag.MsjPantalla
+                                </div>
+                            }
+
+                            @using (Html.BeginForm("RegistroReservas", "Reservas", FormMethod.Post))
+                            {
+
+                                <div class="form-group">
+                                    @Html.Label("Usuario")
+                                    @Html.DropDownListFor(m => m.id_usuario, ViewBag.Usuarios as List<SelectListItem>, new { @class = "form-control form-control-user", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Habitaciones")
+                                    @Html.DropDownListFor(m => m.ID_habitacion, ViewBag.Habitaciones as List<SelectListItem>, new { @class = "form-control form-control-user", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Fecha entrada")
+                                    @Html.TextBoxFor(m => m.fecha_entrada, new { @class = "form-control form-control-user", @placeholder = "Fecha entrada", @type = "datetime-local", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Fecha salida")
+                                    @Html.TextBoxFor(m => m.fecha_salida, new { @class = "form-control form-control-user", @placeholder = "Fecha salida", @type = "datetime-local", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Servicios adicionales")
+                                    @Html.TextBoxFor(m => m.servicios_adicionales, new { @class = "form-control form-control-user", @placeholder = "Servicios adicionales", @required = "true" })
+                                </div>
+
+
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="Procesar">
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

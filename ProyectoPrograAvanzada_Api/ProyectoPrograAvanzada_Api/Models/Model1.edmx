@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProyPrograAvanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="ActualizarHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_habitacion" Type="bigint" Mode="In" />
+          <Parameter Name="tipo_habitacion" Type="varchar" Mode="In" />
+          <Parameter Name="Capacidad" Type="int" Mode="In" />
+          <Parameter Name="Tarifa" Type="decimal" Mode="In" />
+          <Parameter Name="Disponibilidad" Type="bit" Mode="In" />
+          <Parameter Name="ID_localidad" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ActualizarReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_reserva" Type="bigint" Mode="In" />
+          <Parameter Name="id_usuario" Type="bigint" Mode="In" />
+          <Parameter Name="ID_habitacion" Type="bigint" Mode="In" />
+          <Parameter Name="fecha_entrada" Type="datetime" Mode="In" />
+          <Parameter Name="fecha_salida" Type="datetime" Mode="In" />
+          <Parameter Name="estado" Type="bit" Mode="In" />
+          <Parameter Name="servicios_adicionales" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ConsultarHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Consecutivo" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ConsultarHabitaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MostrarTodos" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ConsultarLocalidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ConsultarReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_reserva" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ConsultarReservas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MostrarTodos" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ConsultarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ConsultarUsuariosAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EliminarHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Consecutivo" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EliminarReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_reserva" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="RegistrarHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_habitacion" Type="varchar" Mode="In" />
+          <Parameter Name="Capacidad" Type="int" Mode="In" />
+          <Parameter Name="Tarifa" Type="decimal" Mode="In" />
+          <Parameter Name="ID_localidad" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="RegistrarReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="bigint" Mode="In" />
+          <Parameter Name="ID_habitacion" Type="bigint" Mode="In" />
+          <Parameter Name="fecha_entrada" Type="datetime" Mode="In" />
+          <Parameter Name="fecha_salida" Type="datetime" Mode="In" />
+          <Parameter Name="servicios_adicionales" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ProyPrograAvanModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyPrograAvanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProyPrograAvanEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="ActualizarHabitacion">
+            <Parameter Name="ID_habitacion" Mode="In" Type="Int64" />
+            <Parameter Name="tipo_habitacion" Mode="In" Type="String" />
+            <Parameter Name="Capacidad" Mode="In" Type="Int32" />
+            <Parameter Name="Tarifa" Mode="In" Type="Decimal" />
+            <Parameter Name="Disponibilidad" Mode="In" Type="Boolean" />
+            <Parameter Name="ID_localidad" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ActualizarReserva">
+            <Parameter Name="ID_reserva" Mode="In" Type="Int64" />
+            <Parameter Name="id_usuario" Mode="In" Type="Int64" />
+            <Parameter Name="ID_habitacion" Mode="In" Type="Int64" />
+            <Parameter Name="fecha_entrada" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_salida" Mode="In" Type="DateTime" />
+            <Parameter Name="estado" Mode="In" Type="Boolean" />
+            <Parameter Name="servicios_adicionales" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarHabitacion" ReturnType="Collection(ProyPrograAvanModel.ConsultarHabitacion_Result)">
+          <Parameter Name="Consecutivo" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarHabitaciones" ReturnType="Collection(ProyPrograAvanModel.ConsultarHabitaciones_Result)">
+          <Parameter Name="MostrarTodos" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarLocalidad" ReturnType="Collection(ProyPrograAvanModel.ConsultarLocalidad_Result)" />
+          <FunctionImport Name="ConsultarReserva" ReturnType="Collection(ProyPrograAvanModel.ConsultarReserva_Result)">
+          <Parameter Name="ID_reserva" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarReservas" ReturnType="Collection(ProyPrograAvanModel.ConsultarReservas_Result)">
+          <Parameter Name="MostrarTodos" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarUsuarios" ReturnType="Collection(ProyPrograAvanModel.ConsultarUsuarios_Result)" />
+          <FunctionImport Name="EliminarHabitacion">
+          <Parameter Name="Consecutivo" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarReserva">
+          <Parameter Name="ID_reserva" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="RegistrarHabitacion">
+            <Parameter Name="tipo_habitacion" Mode="In" Type="String" />
+            <Parameter Name="Capacidad" Mode="In" Type="Int32" />
+            <Parameter Name="Tarifa" Mode="In" Type="Decimal" />
+            <Parameter Name="ID_localidad" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="RegistrarReserva">
+            <Parameter Name="id_usuario" Mode="In" Type="Int64" />
+            <Parameter Name="ID_habitacion" Mode="In" Type="Int64" />
+            <Parameter Name="fecha_entrada" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_salida" Mode="In" Type="DateTime" />
+            <Parameter Name="servicios_adicionales" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarUsuariosAdmin" ReturnType="Collection(ProyPrograAvanModel.ConsultarUsuariosAdmin_Result)" />
+        </EntityContainer>
+        <ComplexType Name="ConsultarHabitacion_Result">
+          <Property Type="String" Name="tipo_habitacion" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="tarifa" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="capacidad" Nullable="true" />
+          <Property Type="Boolean" Name="disponibilidad" Nullable="true" />
+          <Property Type="Int64" Name="ID_localidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ConsultarHabitaciones_Result">
+          <Property Type="Int64" Name="ID_habitacion" Nullable="false" />
+          <Property Type="String" Name="tipo_habitacion" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="tarifa" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="capacidad" Nullable="true" />
+          <Property Type="Boolean" Name="disponibilidad" Nullable="true" />
+          <Property Type="Int64" Name="ID_localidad" Nullable="true" />
+          <Property Type="String" Name="nombre_localidad" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="ConsultarLocalidad_Result">
+          <Property Type="Int64" Name="ID_localidad" Nullable="false" />
+          <Property Type="String" Name="nombre_localidad" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="ConsultarReserva_Result">
+          <Property Type="Int64" Name="id_usuario" Nullable="true" />
+          <Property Type="Int64" Name="ID_habitacion" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_entrada" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="fecha_salida" Nullable="true" Precision="23" />
+          <Property Type="String" Name="servicios_adicionales" Nullable="true" MaxLength="255" />
+          <Property Type="Boolean" Name="estado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ConsultarReservas_Result">
+          <Property Type="Int64" Name="ID_reserva" Nullable="false" />
+          <Property Type="Int64" Name="id_usuario" Nullable="true" />
+          <Property Type="Int64" Name="ID_habitacion" Nullable="true" />
+          <Property Type="String" Name="tipo_habitacion" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="fecha_entrada" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="fecha_salida" Nullable="true" Precision="23" />
+          <Property Type="String" Name="servicios_adicionales" Nullable="true" MaxLength="255" />
+          <Property Type="Boolean" Name="estado" Nullable="true" />
+          <Property Type="String" Name="nombre_usuario" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="ConsultarUsuarios_Result">
+          <Property Type="Int64" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="ConsultarUsuariosAdmin_Result">
+          <Property Type="Int64" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyPrograAvanModelStoreContainer" CdmEntityContainer="ProyPrograAvanEntities" >
+          <FunctionImportMapping FunctionImportName="ActualizarHabitacion" FunctionName="ProyPrograAvanModel.Store.ActualizarHabitacion" />
+          <FunctionImportMapping FunctionImportName="ActualizarReserva" FunctionName="ProyPrograAvanModel.Store.ActualizarReserva" />
+          <FunctionImportMapping FunctionImportName="ConsultarHabitacion" FunctionName="ProyPrograAvanModel.Store.ConsultarHabitacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarHabitacion_Result">
+                <ScalarProperty Name="tipo_habitacion" ColumnName="tipo_habitacion" />
+                <ScalarProperty Name="tarifa" ColumnName="tarifa" />
+                <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+                <ScalarProperty Name="disponibilidad" ColumnName="disponibilidad" />
+                <ScalarProperty Name="ID_localidad" ColumnName="ID_localidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarHabitaciones" FunctionName="ProyPrograAvanModel.Store.ConsultarHabitaciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarHabitaciones_Result">
+                <ScalarProperty Name="ID_habitacion" ColumnName="ID_habitacion" />
+                <ScalarProperty Name="tipo_habitacion" ColumnName="tipo_habitacion" />
+                <ScalarProperty Name="tarifa" ColumnName="tarifa" />
+                <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+                <ScalarProperty Name="disponibilidad" ColumnName="disponibilidad" />
+                <ScalarProperty Name="ID_localidad" ColumnName="ID_localidad" />
+                <ScalarProperty Name="nombre_localidad" ColumnName="nombre_localidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarLocalidad" FunctionName="ProyPrograAvanModel.Store.ConsultarLocalidad">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarLocalidad_Result">
+                <ScalarProperty Name="ID_localidad" ColumnName="ID_localidad" />
+                <ScalarProperty Name="nombre_localidad" ColumnName="nombre_localidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarReserva" FunctionName="ProyPrograAvanModel.Store.ConsultarReserva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarReserva_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="ID_habitacion" ColumnName="ID_habitacion" />
+                <ScalarProperty Name="fecha_entrada" ColumnName="fecha_entrada" />
+                <ScalarProperty Name="fecha_salida" ColumnName="fecha_salida" />
+                <ScalarProperty Name="servicios_adicionales" ColumnName="servicios_adicionales" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarReservas" FunctionName="ProyPrograAvanModel.Store.ConsultarReservas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarReservas_Result">
+                <ScalarProperty Name="ID_reserva" ColumnName="ID_reserva" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="ID_habitacion" ColumnName="ID_habitacion" />
+                <ScalarProperty Name="tipo_habitacion" ColumnName="tipo_habitacion" />
+                <ScalarProperty Name="fecha_entrada" ColumnName="fecha_entrada" />
+                <ScalarProperty Name="fecha_salida" ColumnName="fecha_salida" />
+                <ScalarProperty Name="servicios_adicionales" ColumnName="servicios_adicionales" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarUsuarios" FunctionName="ProyPrograAvanModel.Store.ConsultarUsuarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarUsuarios_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EliminarHabitacion" FunctionName="ProyPrograAvanModel.Store.EliminarHabitacion" />
+          <FunctionImportMapping FunctionImportName="EliminarReserva" FunctionName="ProyPrograAvanModel.Store.EliminarReserva" />
+          <FunctionImportMapping FunctionImportName="RegistrarHabitacion" FunctionName="ProyPrograAvanModel.Store.RegistrarHabitacion" />
+          <FunctionImportMapping FunctionImportName="RegistrarReserva" FunctionName="ProyPrograAvanModel.Store.RegistrarReserva" />
+          <FunctionImportMapping FunctionImportName="ConsultarUsuariosAdmin" FunctionName="ProyPrograAvanModel.Store.ConsultarUsuariosAdmin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarUsuariosAdmin_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

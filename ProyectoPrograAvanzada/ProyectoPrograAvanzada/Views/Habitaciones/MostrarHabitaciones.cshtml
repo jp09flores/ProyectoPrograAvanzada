@@ -1,12 +1,13 @@
-﻿﻿@model List<ProyectoWeb_Martes.Entidades.Producto>
+﻿@model List<ProyectoPrograAvanzada.Entidades.Habitaciones>
 @{
     ViewBag.Title = "MostrarHabitaciones";
 }
 
 
-<div class="card shadow mb-4">
+
+<div class="card shadow mb-4 mt-5">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Habitaciones</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -22,19 +23,18 @@
                         }
 
                         <div style="margin-bottom:1%; text-align:right">
-                            <a class="btn btn-primary" href="@Url.Action("RegistrarProducto","Producto")"> + Agregar</a>
+                            <a class="btn btn-primary" href="@Url.Action("RegistroHabitaciones","Habitaciones")"> + Agregar</a>
                         </div>
 
                         <table id="myDataTable" class="table table-bordered dataTable" style="width: 100%;">
                             <thead>
                                 <tr role="row">
-                                    <th>Código</th>
-                                    <th>Nombre</th>
-                                    <th>Precio</th>
-                                    <th>Inventario</th>
-                                    <th>Imagen</th>
-                                    <th>Categoría</th>
-                                    <th>Estado</th>
+                                    <th>ID Habitación</th>
+                                    <th>Tipo</th>
+                                    <th>Capacidad</th>
+                                    <th>Tarifa</th>
+                                    <th>Disponibilidad</th>
+                                    <th>Localidad</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -42,23 +42,22 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr class="odd">
-                                        <td>@item.Consecutivo</td>
-                                        <td>@item.NombreProducto</td>
-                                        <td>@item.Precio</td>
-                                        <td>@item.Inventario</td>
-                                        <td style="text-align:center"><img src="@item.RutaImagen" style="width:125px; height:125px;"></td>
-                                        <td>@item.NombreCategoria</td>
-                                        @if (item.Estado)
+                                        <td>@item.ID_habitacion</td>
+                                        <td>@item.tipo_habitacion</td>
+                                        <td>@item.capacidad</td>
+                                        <td>@item.tarifa</td>
+                                        @if (item.disponibilidad)
                                         {
-                                            <td>Activo</td>
+                                            <td>Disponible</td>
                                         }
                                         else
                                         {
-                                            <td>Inactivo</td>
+                                            <td>No disponible</td>
                                         }
+                                        <td>@item.nombre_localidad</td>
                                         <td style="text-align:center">
-                                            <a href="@Url.Action("ActualizarProducto","Producto", new { id = @item.Consecutivo })"><i class="fa fa-pencil-square-o fa-2x"></i></a>
-                                            <a href="@Url.Action("EliminarProducto","Producto", new { id = @item.Consecutivo })"><i class="fa fa-trash-o fa-2x"></i></a>
+                                            <a href="@Url.Action("ActualizarHabitaciones","Habitaciones", new { id = @item.ID_habitacion })">ACTUALIZAR</a>
+                                            <a href="@Url.Action("EliminarHabitaciones","Habitaciones", new { id = @item.ID_habitacion })">ELIMINAR</a>
                                         </td>
                                     </tr>
                                 }
@@ -73,6 +72,7 @@
 </div>
 
 <script src="~/Estilos/vendor/jquery/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#myDataTable').DataTable({
@@ -82,4 +82,3 @@
         });
     });
 </script>
-

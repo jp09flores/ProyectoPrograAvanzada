@@ -1,0 +1,63 @@
+﻿@model ProyectoPrograAvanzada.Entidades.Habitaciones
+
+
+@{ 
+    ViewBag.Title = "Registro";
+}
+
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Habitaciones</h6>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                            @if (ViewBag.MsjPantalla != null)
+                            {
+                                <div class="alert alert-warning" role="alert" style="text-align:center">
+                                    @ViewBag.MsjPantalla
+                                </div>
+                            }
+
+                            @using (Html.BeginForm("RegistroHabitaciones", "Habitaciones", FormMethod.Post))
+                            {
+
+                                <div class="form-group">
+                                    @Html.Label("Tipo habitacion")
+                                    @Html.TextBoxFor(m => m.tipo_habitacion, new { @class = "form-control form-control-user", @placeholder = "Tipo habitacion", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("capacidad")
+                                    @Html.TextBoxFor(m => m.capacidad, new { @class = "form-control form-control-user", @placeholder = "Capacidad", @type = "Number", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Disponibilidad")
+                                    @Html.DropDownListFor(m => m.disponibilidad, new SelectList(new[] { new SelectListItem { Text = "Seleccione....", Value = "null" }, new SelectListItem { Text = "No Disponible", Value = "false" }, new SelectListItem { Text = " Disponible", Value = "true" } }, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Tarifa")
+                                    @Html.TextBoxFor(m => m.tarifa, new { @class = "form-control form-control-user", @placeholder = "Tarifa", @type = "Number", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Localidad")
+                                    @Html.DropDownListFor(m => m.ID_localidad, ViewBag.Localidad as List<SelectListItem>, new { @class = "form-control form-control-user", @required = "true" })
+                                </div>
+
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="Procesar">
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

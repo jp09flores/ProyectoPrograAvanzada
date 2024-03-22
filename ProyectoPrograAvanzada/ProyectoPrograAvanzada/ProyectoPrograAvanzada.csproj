@@ -45,10 +45,47 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.6.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Json.8.0.0\lib\net462\System.Net.Http.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -124,9 +161,19 @@
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Entidades\Confirmacion.cs" />
+    <Compile Include="Entidades\Localidad.cs" />
+    <Compile Include="Entidades\Habitaciones.cs" />
+    <Compile Include="Entidades\Reservas.cs" />
+    <Compile Include="Entidades\Usuarios.cs" />
+    <Compile Include="Models\UsuariosModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FiltroAdmin.cs" />
+    <Compile Include="Models\FiltroSeguridad.cs" />
+    <Compile Include="Models\HabitacionModel.cs" />
+    <Compile Include="Models\ReservasModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +259,17 @@
     <Content Include="Estilos\mail\contact.js" />
     <Content Include="Estilos\mail\contact.php" />
     <Content Include="Estilos\mail\jqBootstrapValidation.min.js" />
+    <Content Include="Estilos\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Estilos\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Estilos\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Estilos\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Estilos\vendor\jquery-easing\jquery.easing.compatibility.js" />
+    <Content Include="Estilos\vendor\jquery-easing\jquery.easing.js" />
+    <Content Include="Estilos\vendor\jquery-easing\jquery.easing.min.js" />
+    <Content Include="Estilos\vendor\jquery\jquery.js" />
+    <Content Include="Estilos\vendor\jquery\jquery.min.js" />
+    <Content Include="Estilos\vendor\jquery\jquery.slim.js" />
+    <Content Include="Estilos\vendor\jquery\jquery.slim.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -313,6 +371,102 @@
     <Content Include="Estilos\scss\bootstrap\scss\_utilities.scss" />
     <Content Include="Estilos\scss\bootstrap\scss\_variables.scss" />
     <Content Include="Estilos\scss\style.scss" />
+    <Content Include="Estilos\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Estilos\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Estilos\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Estilos\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Estilos\vendor\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\bootstrap.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_alert.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_background-variant.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_badge.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_box-shadow.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_caret.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_deprecate.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_float.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_forms.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_grid-framework.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_grid.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_hover.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_image.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_lists.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_nav-divider.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_resize.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_screen-reader.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_size.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_table-row.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_text-emphasis.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_text-hide.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_transition.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\mixins\_visibility.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_align.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_background.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_borders.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_clearfix.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_display.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_embed.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_flex.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_float.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_interactions.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_overflow.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_position.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_screenreaders.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_shadows.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_sizing.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_spacing.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_stretched-link.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_text.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\utilities\_visibility.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\vendor\_rfs.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_alert.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_badge.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_breadcrumb.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_button-group.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_buttons.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_card.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_carousel.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_close.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_code.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_custom-forms.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_dropdown.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_forms.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_functions.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_grid.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_images.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_input-group.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_jumbotron.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_list-group.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_media.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_mixins.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_modal.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_nav.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_navbar.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_pagination.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_popover.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_print.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_progress.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_reboot.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_root.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_spinners.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_tables.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_toasts.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_tooltip.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_transitions.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_type.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_utilities.scss" />
+    <Content Include="Estilos\vendor\bootstrap\scss\_variables.scss" />
+    <Content Include="Estilos\vendor\jquery\jquery.min.map" />
+    <Content Include="Estilos\vendor\jquery\jquery.slim.min.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -342,10 +496,15 @@
     <Content Include="Views\Reservas\MostrarReservas.cshtml" />
     <Content Include="Views\Usuarios\MostrarUsuarios.cshtml" />
     <Content Include="Views\Habitaciones\MostrarHabitaciones.cshtml" />
+    <Content Include="Views\Habitaciones\RegistroHabitaciones.cshtml" />
+    <Content Include="Views\Habitaciones\ActualizarHabitaciones.cshtml" />
+    <Content Include="Views\Reservas\RegistroReservas.cshtml" />
+    <Content Include="Views\Reservas\ActualizarReservas.cshtml" />
+    <Content Include="Views\Usuarios\RegistroUsuarios.cshtml" />
+    <Content Include="Views\Usuarios\ActualizarUsuarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
