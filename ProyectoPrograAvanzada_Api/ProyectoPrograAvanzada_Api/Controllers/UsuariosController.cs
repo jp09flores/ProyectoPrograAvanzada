@@ -13,7 +13,7 @@ namespace ProyectoPrograAvanzada_Api.Controllers
     {
        
         //[HttpGet]
-        //[Route("HabiUsuariostaciones/ConsultarUsuarios")]
+        //[Route("Usuarios/InicioSesion")]
         //public ConfirmacionUsuarios ConsultarUsuarios(long Consecutivo)
         //{
         //    var respuesta = new ConfirmacionUsuarios();
@@ -56,7 +56,7 @@ namespace ProyectoPrograAvanzada_Api.Controllers
             {
                 using (var db = new ProyPrograAvanEntities())
                 {
-                    var resp = db.InsertarUsuario(entidad.nombre, entidad.correo_electronico, entidad.contrasena);
+                    var resp = db.RegistrarUsuario(entidad.nombre, entidad.correo_electronico, entidad.contrasena);
 
                     if (resp > 0)
                     {

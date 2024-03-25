@@ -16,7 +16,7 @@ namespace ProyectoPrograAvanzada.Entidades
         {
             using (var client = new HttpClient())
             {
-                url += "Inicio/Registro";
+                url += "Usuarios/RegistrarUsuarios";
                 JsonContent jsonEntidad = JsonContent.Create(entidad);
                 var respuesta = client.PostAsync(url, jsonEntidad).Result;
 
@@ -31,7 +31,7 @@ namespace ProyectoPrograAvanzada.Entidades
         {
             using (var client = new HttpClient())
             {
-                url += "Inicio/InicioSesion";
+                url += "Usuarios/InicioSesion";
                 JsonContent jsonEntidad = JsonContent.Create(entidad);
                 var respuesta = client.PostAsync(url, jsonEntidad).Result;
 
