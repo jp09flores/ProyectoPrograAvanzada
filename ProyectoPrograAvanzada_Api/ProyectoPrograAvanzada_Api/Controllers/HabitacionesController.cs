@@ -122,7 +122,7 @@ namespace ProyectoPrograAvanzada_Api.Controllers
             {
                 using (var db = new ProyPrograAvanEntities())
                 {
-                    var resp = db.RegistrarHabitacion(entidad.tipo_habitacion, entidad.capacidad, entidad.tarifa, entidad.ID_localidad);
+                    var resp = db.RegistrarHabitacion(entidad.tipo_habitacion, entidad.capacidad, entidad.tarifa,entidad.img, entidad.ID_localidad);
 
                     if (resp > 0)
                     {
@@ -157,7 +157,7 @@ namespace ProyectoPrograAvanzada_Api.Controllers
             {
                 using (var db = new ProyPrograAvanEntities())
                 {
-                    var resp = db.ActualizarHabitacion(entidad.ID_habitacion, entidad.tipo_habitacion, entidad.capacidad, entidad.tarifa, entidad.disponibilidad, entidad.ID_localidad);
+                    var resp = db.ActualizarHabitacion(entidad.ID_habitacion, entidad.tipo_habitacion, entidad.capacidad, entidad.tarifa, entidad.disponibilidad,entidad.img, entidad.ID_localidad);
 
                     if (resp > 0)
                     {

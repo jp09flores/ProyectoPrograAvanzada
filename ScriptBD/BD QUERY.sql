@@ -40,6 +40,7 @@ CREATE TABLE Habitaciones (
   tarifa DECIMAL(10, 2),
   disponibilidad BIT,
   ID_localidad BIGINT,
+  img varchar(250)
   FOREIGN KEY (ID_localidad) REFERENCES Localidades(ID_localidad)
 );
 
@@ -129,7 +130,8 @@ BEGIN
            h.capacidad,
            h.disponibilidad ,
 		   h.ID_localidad ,
-           l.nombre_localidad
+           l.nombre_localidad,
+		   h.img
     FROM dbo.Habitaciones h 
 	join dbo.Localidades l on l.ID_localidad = h.ID_localidad;
 
@@ -142,7 +144,8 @@ BEGIN
            h.capacidad,
            h.disponibilidad ,
 		   h.ID_localidad ,
-           l.nombre_localidad
+           l.nombre_localidad,
+		   h.img
     FROM dbo.Habitaciones h 
 	join dbo.Localidades l on l.ID_localidad = h.ID_localidad
 	where disponibilidad =1;
@@ -164,7 +167,8 @@ BEGIN
            tarifa ,
            capacidad,
            disponibilidad ,
-           ID_localidad 
+           ID_localidad,
+		   h.img
     FROM Habitaciones
     WHERE ID_habitacion = @Consecutivo;
 END
@@ -172,17 +176,18 @@ GO
 
 -- ------------------Insert---------------------
 
-CREATE PROCEDURE [dbo].[RegistrarHabitacion]
+Alter PROCEDURE [dbo].[RegistrarHabitacion]
     @tipo_habitacion VARCHAR(200),
 	@Capacidad INT,
 	@Tarifa DECIMAL(10,2),
+	@img VARCHAR(250),
     @ID_localidad  BIGINT   
 AS
 BEGIN
     IF NOT EXISTS(SELECT 1 FROM Habitaciones WHERE tipo_habitacion = @tipo_habitacion and capacidad = @Capacidad)
     BEGIN
-        INSERT INTO Habitaciones(tipo_habitacion,capacidad, tarifa, disponibilidad, ID_localidad)
-        VALUES (@tipo_habitacion,@Capacidad,@Tarifa,1,@ID_localidad);
+        INSERT INTO Habitaciones(tipo_habitacion,capacidad, tarifa, disponibilidad, ID_localidad,img)
+        VALUES (@tipo_habitacion,@Capacidad,@Tarifa,1,@ID_localidad,@img);
 
     END
 END
@@ -190,12 +195,13 @@ GO
 
 -- ------------------Update---------------------
 
-CREATE PROCEDURE [dbo].[ActualizarHabitacion]
+Create PROCEDURE [dbo].[ActualizarHabitacion]
 	@ID_habitacion BIGINT,
     @tipo_habitacion VARCHAR(200),
 	@Capacidad INT,
 	@Tarifa DECIMAL(10,2),
 	@Disponibilidad bit,
+	@img VARCHAR(250),
     @ID_localidad  BIGINT   
 AS
 BEGIN
@@ -204,7 +210,8 @@ BEGIN
         tarifa = @Tarifa,
 		disponibilidad = @Disponibilidad, 
         capacidad = @Capacidad,
-        ID_localidad = @ID_localidad
+        ID_localidad = @ID_localidad,
+		img = @img
     WHERE ID_habitacion = @ID_habitacion;
 END
 GO
@@ -359,3 +366,38 @@ SELECT [id_usuario]
 END
 GO
 -- ===============================================
+
+
+
+
+
+CREATE PROCEDURE [dbo].[RegistrarUsuario]
+    @Contrasena        varchar(10),
+    @Nombre                varchar(200),
+    @CorreoElectronico    varchar(200)
+AS
+BEGIN
+
+     IF NOT EXISTS(SELECT 1 FROM dbo.Usuarios WHERE correo_electronico = @CorreoElectronico)
+    BEGIN
+
+          INSERT INTO dbo.Usuarios(Nombre, correo_electronico, Contrasena, ID_rol,estado)
+    VALUES (@Nombre, @CorreoElectronico, @Contrasena, 1,1)
+    END
+
+END
+GO
+
+
+CREATE PROCEDURE [dbo].[IniciarSesionUsuario]
+    @correo_electronico    VARCHAR(200),
+    @contrasena          VARCHAR(10)
+AS
+BEGIN
+    
+        SELECT id_usuario, nombre, correo_electronico,contrasena, u.ID_rol, r.nombre_rol
+        FROM dbo.Usuarios u  
+        INNER JOIN dbo.Roles R ON U.ID_rol = R.ID_rol
+        WHERE U.correo_electronico = @correo_electronico AND U.contrasena = @contrasena  
+    
+END

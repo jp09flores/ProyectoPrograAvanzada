@@ -25,8 +25,14 @@ namespace Practica1.Controllers
         {
             var respuesta = modelo.InicioSesion(entidad);
 
-            if (respuesta.Codigo == 0)
+            if (respuesta.Codigo == 0) { 
+                Session["NombreUsuario"] = respuesta.Dato.nombre;
+                Session["RolUsuario"] = respuesta.Dato.ID_rol;
+                Session["NombreRol"] = respuesta.Dato.nombre_rol;
+
+               
                 return RedirectToAction("PaginaPrincipal", "Inicio");
+            }
             else
             {
                 ViewBag.MsjPantalla = respuesta.Detalle;
@@ -35,6 +41,7 @@ namespace Practica1.Controllers
         }
         public ActionResult PaginaPrincipal()
         {
+            
             return View();
         }
 

@@ -13,6 +13,7 @@ namespace ProyectoPrograAvanzada_Api.Entidades
         public decimal tarifa { get; set; }
         public bool disponibilidad { get; set; }
         public long ID_localidad { get; set; }
+        public string img { get; set; }
         public string nombre_localidad { get; set; }
     }
     public class ConfirmacionHabitaciones

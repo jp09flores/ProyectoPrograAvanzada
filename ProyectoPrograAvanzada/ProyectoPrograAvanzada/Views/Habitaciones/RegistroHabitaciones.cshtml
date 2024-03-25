@@ -46,6 +46,10 @@
                                     @Html.TextBoxFor(m => m.tarifa, new { @class = "form-control form-control-user", @placeholder = "Tarifa", @type = "Number", @required = "true" })
                                 </div>
                                 <div class="form-group">
+                                    @Html.Label("Imagen")
+                                    @Html.TextBoxFor(m => m.img, new { @class = "form-control form-control-user", @placeholder = "imagen", @required = "true" })
+                                </div>
+                                <div class="form-group">
                                     @Html.Label("Localidad")
                                     @Html.DropDownListFor(m => m.ID_localidad, ViewBag.Localidad as List<SelectListItem>, new { @class = "form-control form-control-user", @required = "true" })
                                 </div>
