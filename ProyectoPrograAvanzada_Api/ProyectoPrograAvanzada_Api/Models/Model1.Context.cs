@@ -28,181 +28,39 @@ namespace ProyectoPrograAvanzada_Api.Models
         }
     
     
-        public virtual int ActualizarHabitacion(Nullable<long> iD_habitacion, string tipo_habitacion, Nullable<int> capacidad, Nullable<decimal> tarifa, Nullable<bool> disponibilidad, Nullable<long> iD_localidad)
-        {
-            var iD_habitacionParameter = iD_habitacion.HasValue ?
-                new ObjectParameter("ID_habitacion", iD_habitacion) :
-                new ObjectParameter("ID_habitacion", typeof(long));
-    
-            var tipo_habitacionParameter = tipo_habitacion != null ?
-                new ObjectParameter("tipo_habitacion", tipo_habitacion) :
-                new ObjectParameter("tipo_habitacion", typeof(string));
-    
-            var capacidadParameter = capacidad.HasValue ?
-                new ObjectParameter("Capacidad", capacidad) :
-                new ObjectParameter("Capacidad", typeof(int));
-    
-            var tarifaParameter = tarifa.HasValue ?
-                new ObjectParameter("Tarifa", tarifa) :
-                new ObjectParameter("Tarifa", typeof(decimal));
-    
-            var disponibilidadParameter = disponibilidad.HasValue ?
-                new ObjectParameter("Disponibilidad", disponibilidad) :
-                new ObjectParameter("Disponibilidad", typeof(bool));
-    
-            var iD_localidadParameter = iD_localidad.HasValue ?
-                new ObjectParameter("ID_localidad", iD_localidad) :
-                new ObjectParameter("ID_localidad", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarHabitacion", iD_habitacionParameter, tipo_habitacionParameter, capacidadParameter, tarifaParameter, disponibilidadParameter, iD_localidadParameter);
-        }
-    
-        public virtual int ActualizarReserva(Nullable<long> iD_reserva, Nullable<long> id_usuario, Nullable<long> iD_habitacion, Nullable<System.DateTime> fecha_entrada, Nullable<System.DateTime> fecha_salida, Nullable<bool> estado, string servicios_adicionales)
-        {
-            var iD_reservaParameter = iD_reserva.HasValue ?
-                new ObjectParameter("ID_reserva", iD_reserva) :
-                new ObjectParameter("ID_reserva", typeof(long));
-    
-            var id_usuarioParameter = id_usuario.HasValue ?
-                new ObjectParameter("id_usuario", id_usuario) :
-                new ObjectParameter("id_usuario", typeof(long));
-    
-            var iD_habitacionParameter = iD_habitacion.HasValue ?
-                new ObjectParameter("ID_habitacion", iD_habitacion) :
-                new ObjectParameter("ID_habitacion", typeof(long));
-    
-            var fecha_entradaParameter = fecha_entrada.HasValue ?
-                new ObjectParameter("fecha_entrada", fecha_entrada) :
-                new ObjectParameter("fecha_entrada", typeof(System.DateTime));
-    
-            var fecha_salidaParameter = fecha_salida.HasValue ?
-                new ObjectParameter("fecha_salida", fecha_salida) :
-                new ObjectParameter("fecha_salida", typeof(System.DateTime));
-    
-            var estadoParameter = estado.HasValue ?
-                new ObjectParameter("estado", estado) :
-                new ObjectParameter("estado", typeof(bool));
-    
-            var servicios_adicionalesParameter = servicios_adicionales != null ?
-                new ObjectParameter("servicios_adicionales", servicios_adicionales) :
-                new ObjectParameter("servicios_adicionales", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarReserva", iD_reservaParameter, id_usuarioParameter, iD_habitacionParameter, fecha_entradaParameter, fecha_salidaParameter, estadoParameter, servicios_adicionalesParameter);
-        }
-    
-        public virtual ObjectResult<ConsultarHabitacion_Result> ConsultarHabitacion(Nullable<long> consecutivo)
-        {
-            var consecutivoParameter = consecutivo.HasValue ?
-                new ObjectParameter("Consecutivo", consecutivo) :
-                new ObjectParameter("Consecutivo", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarHabitacion_Result>("ConsultarHabitacion", consecutivoParameter);
-        }
-    
-        public virtual ObjectResult<ConsultarHabitaciones_Result> ConsultarHabitaciones(Nullable<bool> mostrarTodos)
-        {
-            var mostrarTodosParameter = mostrarTodos.HasValue ?
-                new ObjectParameter("MostrarTodos", mostrarTodos) :
-                new ObjectParameter("MostrarTodos", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarHabitaciones_Result>("ConsultarHabitaciones", mostrarTodosParameter);
-        }
-    
         public virtual ObjectResult<ConsultarLocalidad_Result> ConsultarLocalidad()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarLocalidad_Result>("ConsultarLocalidad");
         }
     
-        public virtual ObjectResult<ConsultarReserva_Result> ConsultarReserva(Nullable<long> iD_reserva)
+        public virtual int IniciarSesion(string correo_electronico, string contrasena)
         {
-            var iD_reservaParameter = iD_reserva.HasValue ?
-                new ObjectParameter("ID_reserva", iD_reserva) :
-                new ObjectParameter("ID_reserva", typeof(long));
+            var correo_electronicoParameter = correo_electronico != null ?
+                new ObjectParameter("correo_electronico", correo_electronico) :
+                new ObjectParameter("correo_electronico", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarReserva_Result>("ConsultarReserva", iD_reservaParameter);
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("contrasena", contrasena) :
+                new ObjectParameter("contrasena", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("IniciarSesion", correo_electronicoParameter, contrasenaParameter);
         }
     
-        public virtual ObjectResult<ConsultarReservas_Result> ConsultarReservas(Nullable<bool> mostrarTodos)
+        public virtual int InsertarUsuario(string nombre, string correo_electronico, string contrasena)
         {
-            var mostrarTodosParameter = mostrarTodos.HasValue ?
-                new ObjectParameter("MostrarTodos", mostrarTodos) :
-                new ObjectParameter("MostrarTodos", typeof(bool));
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarReservas_Result>("ConsultarReservas", mostrarTodosParameter);
-        }
+            var correo_electronicoParameter = correo_electronico != null ?
+                new ObjectParameter("correo_electronico", correo_electronico) :
+                new ObjectParameter("correo_electronico", typeof(string));
     
-        public virtual ObjectResult<ConsultarUsuarios_Result> ConsultarUsuarios()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarUsuarios_Result>("ConsultarUsuarios");
-        }
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("contrasena", contrasena) :
+                new ObjectParameter("contrasena", typeof(string));
     
-        public virtual int EliminarHabitacion(Nullable<long> consecutivo)
-        {
-            var consecutivoParameter = consecutivo.HasValue ?
-                new ObjectParameter("Consecutivo", consecutivo) :
-                new ObjectParameter("Consecutivo", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarHabitacion", consecutivoParameter);
-        }
-    
-        public virtual int EliminarReserva(Nullable<long> iD_reserva)
-        {
-            var iD_reservaParameter = iD_reserva.HasValue ?
-                new ObjectParameter("ID_reserva", iD_reserva) :
-                new ObjectParameter("ID_reserva", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarReserva", iD_reservaParameter);
-        }
-    
-        public virtual int RegistrarHabitacion(string tipo_habitacion, Nullable<int> capacidad, Nullable<decimal> tarifa, Nullable<long> iD_localidad)
-        {
-            var tipo_habitacionParameter = tipo_habitacion != null ?
-                new ObjectParameter("tipo_habitacion", tipo_habitacion) :
-                new ObjectParameter("tipo_habitacion", typeof(string));
-    
-            var capacidadParameter = capacidad.HasValue ?
-                new ObjectParameter("Capacidad", capacidad) :
-                new ObjectParameter("Capacidad", typeof(int));
-    
-            var tarifaParameter = tarifa.HasValue ?
-                new ObjectParameter("Tarifa", tarifa) :
-                new ObjectParameter("Tarifa", typeof(decimal));
-    
-            var iD_localidadParameter = iD_localidad.HasValue ?
-                new ObjectParameter("ID_localidad", iD_localidad) :
-                new ObjectParameter("ID_localidad", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarHabitacion", tipo_habitacionParameter, capacidadParameter, tarifaParameter, iD_localidadParameter);
-        }
-    
-        public virtual int RegistrarReserva(Nullable<long> id_usuario, Nullable<long> iD_habitacion, Nullable<System.DateTime> fecha_entrada, Nullable<System.DateTime> fecha_salida, string servicios_adicionales)
-        {
-            var id_usuarioParameter = id_usuario.HasValue ?
-                new ObjectParameter("id_usuario", id_usuario) :
-                new ObjectParameter("id_usuario", typeof(long));
-    
-            var iD_habitacionParameter = iD_habitacion.HasValue ?
-                new ObjectParameter("ID_habitacion", iD_habitacion) :
-                new ObjectParameter("ID_habitacion", typeof(long));
-    
-            var fecha_entradaParameter = fecha_entrada.HasValue ?
-                new ObjectParameter("fecha_entrada", fecha_entrada) :
-                new ObjectParameter("fecha_entrada", typeof(System.DateTime));
-    
-            var fecha_salidaParameter = fecha_salida.HasValue ?
-                new ObjectParameter("fecha_salida", fecha_salida) :
-                new ObjectParameter("fecha_salida", typeof(System.DateTime));
-    
-            var servicios_adicionalesParameter = servicios_adicionales != null ?
-                new ObjectParameter("servicios_adicionales", servicios_adicionales) :
-                new ObjectParameter("servicios_adicionales", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarReserva", id_usuarioParameter, iD_habitacionParameter, fecha_entradaParameter, fecha_salidaParameter, servicios_adicionalesParameter);
-        }
-    
-        public virtual ObjectResult<ConsultarUsuariosAdmin_Result> ConsultarUsuariosAdmin()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarUsuariosAdmin_Result>("ConsultarUsuariosAdmin");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertarUsuario", nombreParameter, correo_electronicoParameter, contrasenaParameter);
         }
     }
 }

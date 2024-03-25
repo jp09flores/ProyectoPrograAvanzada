@@ -1,33 +1,56 @@
-﻿
+﻿@model ProyectoPrograAvanzada.Entidades.Usuarios
+
 @{
     ViewBag.Title = "InicioSesion";
     Layout = "~/Views/Shared/_LayoutExterno.cshtml";
 }
 
 
-    <div class="logo text-center">
-        <h1>Hotel Ejemplo</h1>
-    </div>
-    <div class="wrapper">
-        <div class="inner-warpper text-center">
-            <h2 class="title">Login to your account</h2>
-            <form action="" id="formvalidate">
-                <div class="input-group">
-                    <label class="palceholder" for="userName">User Name</label>
-                    <input class="form-control" name="userName" id="userName" type="text" placeholder="" />
-                    <span class="lighting"></span>
-                </div>
-                <div class="input-group">
-                    <label class="palceholder" for="userPassword">Password</label>
-                    <input class="form-control" name="userPassword" id="userPassword" type="password" placeholder="" />
-                    <span class="lighting"></span>
-                </div>
+<div class="container">
+    <div class="row justify-content-center" style="margin-top:5%">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-3 d-none d-lg-block"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h3 class="h4 text-gray-900 mb-4">Iniciar Sesión</h3>
+                                </div>
 
-                <button style="color: white; text-decoration: none;" onclick="location.href='@Url.Action("PaginaPrincipal", "Inicio")'">Login</button>
-            </form>
-        </div>
-        <div class="signup-wrapper text-center">
-            <a href="">Don't have an accout? <span class="text-primary">@Html.ActionLink("Create One", "Registro", "Inicio", new { area = "" }, new { @class = "nav-link" })</span></a>
+                                @if (ViewBag.MsjPantalla != null)
+                                {
+                                    <div class="alert alert-warning" role="alert" style="text-align:center">
+                                        @ViewBag.MsjPantalla
+                                    </div>
+                                }
+
+                                @using (Html.BeginForm("InicioSesion", "Inicio"))
+                                {
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.correo_electronico, new { @class = "form-control form-control-user", @placeholder = "Correo" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.PasswordFor(m => m.contrasena, new { @class = "form-control form-control-user", @placeholder = "Contraseña" })
+                                    </div>
+
+                                    <input type="submit" class="btn btn-primary btn-user btn-block" value="Iniciar Sesión">
+                                }
+
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="@Url.Action("Registro","Inicio")">Recuperar acceso</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="@Url.Action("Registro","Inicio")">Crear cuenta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
