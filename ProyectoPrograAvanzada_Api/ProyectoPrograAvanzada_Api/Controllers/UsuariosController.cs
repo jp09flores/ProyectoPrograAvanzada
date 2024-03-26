@@ -59,7 +59,7 @@ namespace ProyectoPrograAvanzada_Api.Controllers
             {
                 using (var db = new ProyPrograAvanEntities())
                 {
-                    var resp = db.RegistrarUsuario(entidad.nombre, entidad.correo_electronico, entidad.contrasena);
+                    var resp = db.RegistrarUsuario(entidad.contrasena,entidad.nombre, entidad.correo_electronico);
 
                     if (resp > 0)
                     {

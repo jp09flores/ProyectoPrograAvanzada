@@ -56,9 +56,13 @@
                                         <td>@item.nombre_usuario</td>
                                         <td style="text-align:center">
                                             <a href="@Url.Action("ActualizarReservas","Reservas", new { id = @item.ID_reserva })">ACTUALIZAR</a>
+                                            @if (item.estado)
+                                            {
                                             <a href="@Url.Action("EliminarReservas","Reservas", new { id = @item.ID_reserva })">ELIMINAR</a>
-                                        </td>
-                                    </tr>
+                                            }
+                                            
+                                            </td>
+                                        </tr>
                                 }
                             </tbody>
                         </table>

@@ -30,11 +30,11 @@
                             <thead>
                                 <tr role="row">
                                     <th>ID </th>
-                                    <th>nombre</th>
-                                    <th>correo</th>
-                                    <th>contra</th>
-                                    <th>nombre rol</th>
-                                    <th>estado</th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Contraseña</th>
+                                    <th>Rol</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -57,9 +57,13 @@
                                         }
                                         <td style="text-align:center">
                                             <a href="@Url.Action("ActualizarUsuarios","Usuarios", new { id = @item.id_usuario })">ACTUALIZAR</a>
-                                            <a href="@Url.Action("EliminarUsuarios","Usuarios", new { id = @item.id_usuario })">ELIMINAR</a>
-                                        </td>
-                                    </tr>
+                                            @if (item.estado)
+                                            {
+                                           <a href="@Url.Action("EliminarUsuarios","Usuarios", new { id = @item.id_usuario })">ELIMINAR</a>
+                                        }
+                                            
+                                            </td>
+                                        </tr>
                                 }
                             </tbody>
                         </table>

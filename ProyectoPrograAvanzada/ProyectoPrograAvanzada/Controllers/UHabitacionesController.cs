@@ -28,7 +28,7 @@ namespace ProyectoPrograAvanzada.Controllers
                 return View();
             }
         }
-
+        [FiltroSeguridad]
         [HttpGet]
         public ActionResult RegistroFinalUHabitacion(long id)
         {

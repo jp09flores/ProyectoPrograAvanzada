@@ -40,6 +40,10 @@ namespace ProyectoPrograAvanzada.Controllers
         [HttpPost]
         public ActionResult RegistroReservas(Reservas entidad)
         {
+            TimeSpan horaDeseadaEntrada = new TimeSpan(13, 0, 0);
+            entidad.fecha_entrada += horaDeseadaEntrada;
+            TimeSpan horaDeseadaSalida = new TimeSpan(11, 0, 0);
+            entidad.fecha_salida += horaDeseadaSalida;
             var respuesta = modelo.RegistrarReservas(entidad);
 
             if (respuesta.Codigo == 0)

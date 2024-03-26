@@ -83,7 +83,7 @@ namespace ProyectoPrograAvanzada.Controllers
 
             if (respuesta.Codigo == 0)
             {
-                return RedirectToAction("MostrarHabitaciones", "Producto");
+                return RedirectToAction("MostrarHabitaciones", "Habitaciones");
             }
             else
             {
