@@ -1,7 +1,52 @@
-﻿
+﻿@model ProyectoPrograAvanzada.Entidades.Usuarios
 @{
     ViewBag.Title = "RegistroUsuarios";
 }
 
-<h2>RegistroUsuarios</h2>
 
+
+<div class="container mt-5">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Habitaciones</h6>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                            @if (ViewBag.MsjPantalla != null)
+                            {
+                                <div class="alert alert-warning" role="alert" style="text-align:center">
+                                    @ViewBag.MsjPantalla
+                                </div>
+                            }
+
+                            @using (Html.BeginForm("RegistroUsuarios", "Usuarios", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.nombre, new { @class = "form-control form-control-user", @placeholder = "Nombre", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.correo_electronico, new { @class = "form-control form-control-user", @placeholder = "Correo", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control form-control-user", @placeholder = "Contraseña", @required = "true" })
+                                </div>
+
+
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar">
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

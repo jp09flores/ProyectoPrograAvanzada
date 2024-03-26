@@ -94,6 +94,35 @@ namespace ProyectoPrograAvanzada_Api.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarReserva", iD_reservaParameter, id_usuarioParameter, iD_habitacionParameter, fecha_entradaParameter, fecha_salidaParameter, estadoParameter, servicios_adicionalesParameter);
         }
     
+        public virtual int ActualizarUsuario(Nullable<long> id_usuario, string nombre, string correo_electronico, string contrasena, Nullable<long> iD_rol, Nullable<bool> estado)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(long));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var correo_electronicoParameter = correo_electronico != null ?
+                new ObjectParameter("correo_electronico", correo_electronico) :
+                new ObjectParameter("correo_electronico", typeof(string));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("contrasena", contrasena) :
+                new ObjectParameter("contrasena", typeof(string));
+    
+            var iD_rolParameter = iD_rol.HasValue ?
+                new ObjectParameter("ID_rol", iD_rol) :
+                new ObjectParameter("ID_rol", typeof(long));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarUsuario", id_usuarioParameter, nombreParameter, correo_electronicoParameter, contrasenaParameter, iD_rolParameter, estadoParameter);
+        }
+    
         public virtual ObjectResult<ConsultarHabitacion_Result> ConsultarHabitacion(Nullable<long> consecutivo)
         {
             var consecutivoParameter = consecutivo.HasValue ?
@@ -135,6 +164,20 @@ namespace ProyectoPrograAvanzada_Api.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarReservas_Result>("ConsultarReservas", mostrarTodosParameter);
         }
     
+        public virtual ObjectResult<ConsultarUsuario_Result> ConsultarUsuario(Nullable<long> id_usuario)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarUsuario_Result>("ConsultarUsuario", id_usuarioParameter);
+        }
+    
+        public virtual ObjectResult<ConsultarUsuarios_Result> ConsultarUsuarios()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarUsuarios_Result>("ConsultarUsuarios");
+        }
+    
         public virtual ObjectResult<ConsultarUsuariosAdmin_Result> ConsultarUsuariosAdmin()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarUsuariosAdmin_Result>("ConsultarUsuariosAdmin");
@@ -156,6 +199,15 @@ namespace ProyectoPrograAvanzada_Api.Models
                 new ObjectParameter("ID_reserva", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarReserva", iD_reservaParameter);
+        }
+    
+        public virtual int EliminarUsuario(Nullable<long> id_usuario)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarUsuario", id_usuarioParameter);
         }
     
         public virtual ObjectResult<IniciarSesionUsuario_Result> IniciarSesionUsuario(string correo_electronico, string contrasena)

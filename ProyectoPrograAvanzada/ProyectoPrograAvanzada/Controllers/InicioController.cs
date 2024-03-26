@@ -39,6 +39,7 @@ namespace Practica1.Controllers
                 return View();
             }
         }
+        [FiltroSeguridad]
         public ActionResult PaginaPrincipal()
         {
             

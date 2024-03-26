@@ -16,7 +16,7 @@ namespace ProyectoPrograAvanzada.Models
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
                 {
                     { "controller", "Inicio" },
-                    { "action", "IniciarSesion"}
+                    { "action", "InicioSesion"}
                 });
             }
 

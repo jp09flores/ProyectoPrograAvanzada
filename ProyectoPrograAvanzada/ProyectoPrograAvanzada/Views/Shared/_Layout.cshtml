@@ -17,6 +17,9 @@
 
     <!-- Custom Stylesheet -->
     <link href="/Estilos/css/style.css" rel="stylesheet">
+
+    <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 </head>
 
  <body>
@@ -71,15 +74,19 @@
                          <a href="" class="nav-item nav-link">About</a>
                          <a href="" class="nav-item nav-link">Services</a>
                          <a href="" class="nav-item nav-link">Tour Packages</a>
-                         <div class="nav-item dropdown">
-                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Admin</a>
-                             <div class="dropdown-menu border-0 rounded-0 m-0">
-                                 <a href="@Url.Action("MostrarHabitaciones","Habitaciones")" class="dropdown-item">Habitaciones</a>
-                                 <a href="@Url.Action("MostrarUsuarios","Usuarios")" class="dropdown-item">Usuarios</a>
-                                 <a href="@Url.Action("MostrarReservas","Reservas")" class="dropdown-item">Reservas</a>
+                         @if (Session["RolUsuario"] != null && Session["RolUsuario"].ToString() == "1")
+                         {
+                             <div class="nav-item dropdown">
+                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Admin</a>
+                                 <div class="dropdown-menu border-0 rounded-0 m-0">
+                                     <a href="@Url.Action("MostrarHabitaciones","Habitaciones")" class="dropdown-item">Habitaciones</a>
+                                     <a href="@Url.Action("MostrarUsuarios","Usuarios")" class="dropdown-item">Usuarios</a>
+                                     <a href="@Url.Action("MostrarReservas","Reservas")" class="dropdown-item">Reservas</a>
 
+                                 </div>
                              </div>
-                         </div>
+                         }
+                         
                      </div>
                  </div>
              </nav>

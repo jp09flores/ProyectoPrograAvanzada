@@ -10,8 +10,8 @@ using System.Web.Mvc;
 
 namespace ProyectoPrograAvanzada.Controllers
 {
-    //[FiltroSeguridad]
-    //[FiltroAdmin]
+    [FiltroSeguridad]
+    [FiltroAdmin]
     public class HabitacionesController : Controller
     {
         HabitacionModel modelo = new HabitacionModel();

@@ -1,7 +1,64 @@
-﻿
+﻿@model ProyectoPrograAvanzada.Entidades.Usuarios
 @{
     ViewBag.Title = "ActualizarUsuarios";
 }
 
-<h2>ActualizarUsuarios</h2>
 
+
+<div class="container mt-5">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Usuarios</h6>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                            @if (ViewBag.MsjPantalla != null)
+                            {
+                                <div class="alert alert-warning" role="alert" style="text-align:center">
+                                    @ViewBag.MsjPantalla
+                                </div>
+                            }
+
+                            @using (Html.BeginForm("ActualizarUsuarios", "Usuarios", FormMethod.Post))
+                            {
+                                @Html.HiddenFor(m => m.id_usuario)
+                        <div class="form-group">
+                            @Html.Label("Nombre")
+                            @Html.TextBoxFor(m => m.nombre, new { @class = "form-control form-control-user", @placeholder = "Nombre", @required = "true" })
+                        </div>
+                                <div class="form-group">
+                                    @Html.Label("Correo")
+                                    @Html.TextBoxFor(m => m.correo_electronico, new { @class = "form-control form-control-user", @placeholder = "Correo", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Contrasena")
+                                    @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control form-control-user", @placeholder = "Contraseña", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Estado")
+                                    @Html.DropDownListFor(m => m.estado, new SelectList(new[] { new SelectListItem { Text = "Seleccione....", Value = "null" }, new SelectListItem { Text = "Inactivo", Value = "false" }, new SelectListItem { Text = " Activo", Value = "true" } }, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Rol")
+                                    @Html.DropDownListFor(m => m.ID_rol, new SelectList(new[] { new SelectListItem { Text = "Administrador", Value = "1" }, new SelectListItem { Text = "Usuario", Value = "2" } }, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+
+
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar">
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

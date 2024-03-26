@@ -92,8 +92,10 @@ INSERT INTO Localidades ( nombre_localidad) VALUES ( 'Manuel Antonio');
 INSERT INTO Localidades (nombre_localidad) VALUES ( 'Limon');
 
 -- Inserts para la tabla Habitaciones
-INSERT INTO Habitaciones (tipo_habitacion, capacidad, tarifa, disponibilidad, ID_localidad) VALUES ('Individual', 1, 50.00, 1, 1);
-INSERT INTO Habitaciones (tipo_habitacion, capacidad, tarifa, disponibilidad, ID_localidad) VALUES ('Doble', 2, 80.00, 1, 2);
+INSERT INTO Habitaciones (tipo_habitacion, capacidad, tarifa, disponibilidad, ID_localidad, img) VALUES ('Individual', 1, 50.00, 1, 1, 'https://i.pinimg.com/originals/8f/a5/71/8fa571bf5e890bdbe1a292acc3052604.jpg');
+INSERT INTO Habitaciones (tipo_habitacion, capacidad, tarifa, disponibilidad, ID_localidad, img) VALUES ('Doble', 2, 80.00, 1, 1, 'https://i.pinimg.com/originals/d0/6a/4a/d06a4a531480ba3cf0298b59918ae316.jpg');
+INSERT INTO Habitaciones (tipo_habitacion, capacidad, tarifa, disponibilidad, ID_localidad, img) VALUES ('Doble', 2, 80.00, 1, 2, 'https://www.florenciaplazahotel.com/wp-content/uploads/2019/11/FPH-Habitacion-doble.jpg');
+INSERT INTO Habitaciones (tipo_habitacion, capacidad, tarifa, disponibilidad, ID_localidad, img) VALUES ('Suite', 4, 150.00, 1, 3, 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/309694982.jpg?k=6cb63aeac7aba2a92118773436e8ce29aa6892372ad27d14d72298ccd8113101&o=&hp=1');
 
 -- Inserts para la tabla Reservas
 INSERT INTO Reservas (id_usuario, ID_habitacion, fecha_entrada, fecha_salida, servicios_adicionales,estado) VALUES (1, 1, '2024-04-10', '2024-04-15', 'Desayuno incluido',1);
@@ -159,7 +161,7 @@ GO
 
 -- ------------------Select UNO---------------------
 
-CREATE PROCEDURE [dbo].[ConsultarHabitacion]
+Create PROCEDURE [dbo].[ConsultarHabitacion]
     @Consecutivo BIGINT
 AS
 BEGIN
@@ -168,7 +170,7 @@ BEGIN
            capacidad,
            disponibilidad ,
            ID_localidad,
-		   h.img
+		   img
     FROM Habitaciones
     WHERE ID_habitacion = @Consecutivo;
 END
@@ -176,7 +178,7 @@ GO
 
 -- ------------------Insert---------------------
 
-Alter PROCEDURE [dbo].[RegistrarHabitacion]
+Create PROCEDURE [dbo].[RegistrarHabitacion]
     @tipo_habitacion VARCHAR(200),
 	@Capacidad INT,
 	@Tarifa DECIMAL(10,2),
@@ -371,7 +373,57 @@ GO
 
 
 
-CREATE PROCEDURE [dbo].[RegistrarUsuario]
+
+
+
+
+
+
+
+
+
+
+
+-- ===============================================
+--               CRUD USUARIOS
+
+-- ------------------Select TODOS---------------------
+
+CREATE PROCEDURE [dbo].[ConsultarUsuarios]
+AS
+BEGIN
+
+SELECT [id_usuario]
+      ,[nombre]
+      ,[correo_electronico]
+      ,[contrasena]
+      ,u.[ID_rol]
+	  ,r.nombre_rol
+      ,[estado]
+  FROM Usuarios u
+  join roles r on u.ID_rol = r.ID_rol
+    
+END
+
+-- ------------------Select UNO---------------------
+
+CREATE PROCEDURE [dbo].[ConsultarUsuario]
+    @id_usuario BIGINT
+AS
+BEGIN
+    SELECT nombre,
+           correo_electronico,
+           contrasena,
+           ID_rol,
+           estado
+    FROM Usuarios
+    WHERE id_usuario = @id_usuario;
+END
+GO
+
+-- ------------------Insert---------------------
+
+Create PROCEDURE [dbo].[RegistrarUsuario]
     @Contrasena        varchar(10),
     @Nombre                varchar(200),
     @CorreoElectronico    varchar(200)
@@ -382,14 +434,49 @@ BEGIN
     BEGIN
 
           INSERT INTO dbo.Usuarios(Nombre, correo_electronico, Contrasena, ID_rol,estado)
-    VALUES (@Nombre, @CorreoElectronico, @Contrasena, 1,1)
+    VALUES (@Nombre, @CorreoElectronico, @Contrasena, 2,1)
     END
 
 END
 GO
 
+-- ------------------Update---------------------
 
-CREATE PROCEDURE [dbo].[IniciarSesionUsuario]
+Create PROCEDURE [dbo].[ActualizarUsuario]
+    @id_usuario BIGINT,
+    @nombre VARCHAR(255),
+    @correo_electronico VARCHAR(255),
+    @contrasena VARCHAR(255),
+    @ID_rol BIGINT,
+    @estado bit
+AS
+BEGIN
+    UPDATE Usuarios
+    SET nombre = @nombre,
+        correo_electronico = @correo_electronico,
+        contrasena = @contrasena,
+        ID_rol = @ID_rol,
+        estado = @estado
+    WHERE id_usuario = @id_usuario;
+END
+GO
+
+-- ------------------Delete---------------------
+
+create PROCEDURE [dbo].[EliminarUsuario]
+    @id_usuario BIGINT
+AS
+BEGIN
+    UPDATE Usuarios
+    SET estado = 0
+    WHERE id_usuario = @id_usuario;
+END
+GO
+
+
+
+-- -------------------Inicio Sesion -------------
+Create PROCEDURE [dbo].[IniciarSesionUsuario]
     @correo_electronico    VARCHAR(200),
     @contrasena          VARCHAR(10)
 AS
@@ -398,6 +485,9 @@ BEGIN
         SELECT id_usuario, nombre, correo_electronico,contrasena, u.ID_rol, r.nombre_rol
         FROM dbo.Usuarios u  
         INNER JOIN dbo.Roles R ON U.ID_rol = R.ID_rol
-        WHERE U.correo_electronico = @correo_electronico AND U.contrasena = @contrasena  
+        WHERE U.correo_electronico = @correo_electronico AND U.contrasena = @contrasena and estado = 1 
     
 END
+
+
+-- ===============================================

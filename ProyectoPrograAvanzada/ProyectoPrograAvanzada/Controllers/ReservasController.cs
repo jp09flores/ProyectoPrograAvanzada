@@ -9,8 +9,8 @@ using System.Web.Mvc;
 
 namespace ProyectoPrograAvanzada.Controllers
 {
-    //[FiltroSeguridad]
-    //[FiltroAdmin]
+    [FiltroSeguridad]
+    [FiltroAdmin]
     public class ReservasController : Controller
     {
         ReservasModel modelo = new ReservasModel();

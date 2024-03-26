@@ -1,7 +1,85 @@
-﻿
+﻿@model List<ProyectoPrograAvanzada.Entidades.Usuarios>
 @{
     ViewBag.Title = "MostrarUsuarios";
 }
 
-<h2>MostrarUsuarios</h2>
+
+
+
+<div class="card shadow mb-4 mt-5">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Reservas</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        @if (ViewBag.MsjPantalla != null)
+                        {
+                            <div class="alert alert-warning" role="alert" style="text-align:center">
+                                @ViewBag.MsjPantalla
+                            </div>
+                        }
+
+                        <div style="margin-bottom:1%; text-align:right">
+                            <a class="btn btn-primary" href="@Url.Action("RegistroUsuarios","Usuarios")"> + Agregar</a>
+                        </div>
+
+                        <table id="myDataTable" class="table table-bordered dataTable" style="width: 100%;">
+                            <thead>
+                                <tr role="row">
+                                    <th>ID </th>
+                                    <th>nombre</th>
+                                    <th>correo</th>
+                                    <th>contra</th>
+                                    <th>nombre rol</th>
+                                    <th>estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="odd">
+                                        <td>@item.id_usuario</td>
+                                        <td>@item.nombre</td>
+                                        <td>@item.correo_electronico</td>
+                                        <td>@item.contrasena</td>
+                                        <td>@item.nombre_rol</td>
+                                        @if (item.estado)
+                                        {
+                                            <td>Activo</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Inactivo</td>
+                                        }
+                                        <td style="text-align:center">
+                                            <a href="@Url.Action("ActualizarUsuarios","Usuarios", new { id = @item.id_usuario })">ACTUALIZAR</a>
+                                            <a href="@Url.Action("EliminarUsuarios","Usuarios", new { id = @item.id_usuario })">ELIMINAR</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Estilos/vendor/jquery/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myDataTable').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/2.0.2/i18n/es-ES.json',
+            }
+        });
+    });
+</script>
+
 

@@ -23,6 +23,14 @@
           <Parameter Name="estado" Type="bit" Mode="In" />
           <Parameter Name="servicios_adicionales" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="ActualizarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="bigint" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="correo_electronico" Type="varchar" Mode="In" />
+          <Parameter Name="contrasena" Type="varchar" Mode="In" />
+          <Parameter Name="ID_rol" Type="bigint" Mode="In" />
+          <Parameter Name="estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="ConsultarHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Consecutivo" Type="bigint" Mode="In" />
         </Function>
@@ -36,12 +44,19 @@
         <Function Name="ConsultarReservas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MostrarTodos" Type="bit" Mode="In" />
         </Function>
+        <Function Name="ConsultarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ConsultarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ConsultarUsuariosAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="EliminarHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Consecutivo" Type="bigint" Mode="In" />
         </Function>
         <Function Name="EliminarReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_reserva" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EliminarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="bigint" Mode="In" />
         </Function>
         <Function Name="IniciarSesionUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="correo_electronico" Type="varchar" Mode="In" />
@@ -91,6 +106,14 @@
             <Parameter Name="estado" Mode="In" Type="Boolean" />
             <Parameter Name="servicios_adicionales" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ActualizarUsuario">
+            <Parameter Name="id_usuario" Mode="In" Type="Int64" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="correo_electronico" Mode="In" Type="String" />
+            <Parameter Name="contrasena" Mode="In" Type="String" />
+            <Parameter Name="ID_rol" Mode="In" Type="Int64" />
+            <Parameter Name="estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
           <FunctionImport Name="ConsultarHabitacion" ReturnType="Collection(ProyPrograAvanModel.ConsultarHabitacion_Result)">
             <Parameter Name="Consecutivo" Mode="In" Type="Int64" />
           </FunctionImport>
@@ -104,12 +127,19 @@
           <FunctionImport Name="ConsultarReservas" ReturnType="Collection(ProyPrograAvanModel.ConsultarReservas_Result)">
             <Parameter Name="MostrarTodos" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="ConsultarUsuario" ReturnType="Collection(ProyPrograAvanModel.ConsultarUsuario_Result)">
+            <Parameter Name="id_usuario" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarUsuarios" ReturnType="Collection(ProyPrograAvanModel.ConsultarUsuarios_Result)" />
           <FunctionImport Name="ConsultarUsuariosAdmin" ReturnType="Collection(ProyPrograAvanModel.ConsultarUsuariosAdmin_Result)" />
           <FunctionImport Name="EliminarHabitacion">
             <Parameter Name="Consecutivo" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EliminarReserva">
             <Parameter Name="ID_reserva" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarUsuario">
+            <Parameter Name="id_usuario" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="IniciarSesionUsuario" ReturnType="Collection(ProyPrograAvanModel.IniciarSesionUsuario_Result)">
             <Parameter Name="correo_electronico" Mode="In" Type="String" />
@@ -176,6 +206,23 @@
           <Property Type="Boolean" Name="estado" Nullable="true" />
           <Property Type="String" Name="nombre_usuario" Nullable="true" MaxLength="255" />
         </ComplexType>
+        <ComplexType Name="ConsultarUsuario_Result">
+          <Property Type="Int64" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="correo_electronico" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="contrasena" Nullable="true" MaxLength="255" />
+          <Property Type="Int64" Name="ID_rol" Nullable="true" />
+          <Property Type="Boolean" Name="estado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ConsultarUsuarios_Result">
+          <Property Type="Int64" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="correo_electronico" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="contrasena" Nullable="true" MaxLength="255" />
+          <Property Type="Int64" Name="ID_rol" Nullable="true" />
+          <Property Type="String" Name="nombre_rol" Nullable="true" MaxLength="255" />
+          <Property Type="Boolean" Name="estado" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="ConsultarUsuariosAdmin_Result">
           <Property Type="Int64" Name="id_usuario" Nullable="false" />
           <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
@@ -196,6 +243,7 @@
         <EntityContainerMapping StorageEntityContainer="ProyPrograAvanModelStoreContainer" CdmEntityContainer="ProyPrograAvanEntities" >
           <FunctionImportMapping FunctionImportName="ActualizarHabitacion" FunctionName="ProyPrograAvanModel.Store.ActualizarHabitacion" />
           <FunctionImportMapping FunctionImportName="ActualizarReserva" FunctionName="ProyPrograAvanModel.Store.ActualizarReserva" />
+          <FunctionImportMapping FunctionImportName="ActualizarUsuario" FunctionName="ProyPrograAvanModel.Store.ActualizarUsuario" />
           <FunctionImportMapping FunctionImportName="ConsultarHabitacion" FunctionName="ProyPrograAvanModel.Store.ConsultarHabitacion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarHabitacion_Result">
@@ -257,6 +305,31 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarUsuario" FunctionName="ProyPrograAvanModel.Store.ConsultarUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarUsuario_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="ID_rol" ColumnName="ID_rol" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarUsuarios" FunctionName="ProyPrograAvanModel.Store.ConsultarUsuarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarUsuarios_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="ID_rol" ColumnName="ID_rol" />
+                <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ConsultarUsuariosAdmin" FunctionName="ProyPrograAvanModel.Store.ConsultarUsuariosAdmin">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarUsuariosAdmin_Result">
@@ -267,6 +340,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="EliminarHabitacion" FunctionName="ProyPrograAvanModel.Store.EliminarHabitacion" />
           <FunctionImportMapping FunctionImportName="EliminarReserva" FunctionName="ProyPrograAvanModel.Store.EliminarReserva" />
+          <FunctionImportMapping FunctionImportName="EliminarUsuario" FunctionName="ProyPrograAvanModel.Store.EliminarUsuario" />
           <FunctionImportMapping FunctionImportName="IniciarSesionUsuario" FunctionName="ProyPrograAvanModel.Store.IniciarSesionUsuario">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ProyPrograAvanModel.IniciarSesionUsuario_Result">
