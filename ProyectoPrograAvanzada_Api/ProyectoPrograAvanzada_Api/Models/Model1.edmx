@@ -207,7 +207,6 @@
           <Property Type="String" Name="nombre_usuario" Nullable="true" MaxLength="255" />
         </ComplexType>
         <ComplexType Name="ConsultarUsuario_Result">
-          <Property Type="Int64" Name="id_usuario" Nullable="false" />
           <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="correo_electronico" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="contrasena" Nullable="true" MaxLength="255" />
@@ -308,7 +307,6 @@
           <FunctionImportMapping FunctionImportName="ConsultarUsuario" FunctionName="ProyPrograAvanModel.Store.ConsultarUsuario">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarUsuario_Result">
-                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
                 <ScalarProperty Name="contrasena" ColumnName="contrasena" />
@@ -370,7 +368,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

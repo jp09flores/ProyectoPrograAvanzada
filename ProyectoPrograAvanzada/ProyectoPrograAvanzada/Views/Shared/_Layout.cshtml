@@ -73,7 +73,7 @@
                          <a href="" class="nav-item nav-link active">Home</a>
                          <a href="" class="nav-item nav-link">About</a>
                          <a href="" class="nav-item nav-link">Services</a>
-                         <a href="" class="nav-item nav-link">Tour Packages</a>
+                         <a href="@Url.Action("ConsultarUHabitaciones","UHabitaciones")" class="nav-item nav-link">Habitaciones</a>
                          @if (Session["RolUsuario"] != null && Session["RolUsuario"].ToString() == "1")
                          {
                              <div class="nav-item dropdown">

@@ -160,12 +160,14 @@
     <Compile Include="Controllers\HabitacionesController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
+    <Compile Include="Controllers\UHabitacionesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Entidades\Confirmacion.cs" />
     <Compile Include="Entidades\Localidad.cs" />
     <Compile Include="Entidades\Habitaciones.cs" />
     <Compile Include="Entidades\Reservas.cs" />
     <Compile Include="Entidades\Usuarios.cs" />
+    <Compile Include="Models\UHabitacionModel.cs" />
     <Compile Include="Models\UsuariosModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -502,6 +504,8 @@
     <Content Include="Views\Reservas\ActualizarReservas.cshtml" />
     <Content Include="Views\Usuarios\RegistroUsuarios.cshtml" />
     <Content Include="Views\Usuarios\ActualizarUsuarios.cshtml" />
+    <Content Include="Views\UHabitaciones\ConsultarUHabitaciones.cshtml" />
+    <Content Include="Views\UHabitaciones\RegistroFinalUHabitacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

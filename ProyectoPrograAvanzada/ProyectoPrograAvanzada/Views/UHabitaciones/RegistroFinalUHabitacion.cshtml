@@ -1,0 +1,43 @@
+﻿@model ProyectoPrograAvanzada.Entidades.Reservas
+
+@{
+    ViewBag.Title = "RegistroFinalUHabitacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"> Gestión de Reservas </h6>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                            @if (ViewBag.MsjPantalla != null)
+                            {
+                                <div class="alert alert-warning" role="alert" style="text-align:center">
+                                    @ViewBag.MsjPantalla
+                                </div>
+                            }
+
+                            @using (Html.BeginForm("RegistroFinalUHabitacion", "UHabitaciones", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    @Html.Label("Número de Habitación")
+                                    @Html.TextBoxFor(m => m.ID_habitacion, new { @class = "form-control form-control-user", @placeholder = "Número de Habitación", @required = "true", @readOnly = "true" })
+                                </div>
+
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="Procesar">
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

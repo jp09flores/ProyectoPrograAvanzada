@@ -13,7 +13,6 @@ namespace ProyectoPrograAvanzada_Api.Models
     
     public partial class ConsultarUsuario_Result
     {
-        public long id_usuario { get; set; }
         public string nombre { get; set; }
         public string correo_electronico { get; set; }
         public string contrasena { get; set; }
