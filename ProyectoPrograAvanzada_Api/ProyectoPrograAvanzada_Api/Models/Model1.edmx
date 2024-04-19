@@ -62,6 +62,10 @@
           <Parameter Name="correo_electronico" Type="varchar" Mode="In" />
           <Parameter Name="contrasena" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="RecuperarAccesoUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="correo_electronico" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="RegistrarHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tipo_habitacion" Type="varchar" Mode="In" />
           <Parameter Name="Capacidad" Type="int" Mode="In" />
@@ -145,6 +149,10 @@
             <Parameter Name="correo_electronico" Mode="In" Type="String" />
             <Parameter Name="contrasena" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="RecuperarAccesoUsuario" ReturnType="Collection(ProyPrograAvanModel.RecuperarAccesoUsuario_Result)">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="correo_electronico" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="RegistrarHabitacion">
             <Parameter Name="tipo_habitacion" Mode="In" Type="String" />
             <Parameter Name="Capacidad" Mode="In" Type="Int32" />
@@ -221,6 +229,8 @@
           <Property Type="Int64" Name="ID_rol" Nullable="true" />
           <Property Type="String" Name="nombre_rol" Nullable="true" MaxLength="255" />
           <Property Type="Boolean" Name="estado" Nullable="true" />
+          <Property Type="DateTime" Name="Vencimiento" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="temporal" Nullable="false" />
         </ComplexType>
         <ComplexType Name="ConsultarUsuariosAdmin_Result">
           <Property Type="Int64" Name="id_usuario" Nullable="false" />
@@ -233,6 +243,15 @@
           <Property Type="String" Name="contrasena" Nullable="true" MaxLength="255" />
           <Property Type="Int64" Name="ID_rol" Nullable="true" />
           <Property Type="String" Name="nombre_rol" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="RecuperarAccesoUsuario_Result">
+          <Property Type="Int64" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="contrasena" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="correo_electronico" Nullable="true" MaxLength="255" />
+          <Property Type="Boolean" Name="Estado" Nullable="true" />
+          <Property Type="Boolean" Name="Temporal" Nullable="false" />
+          <Property Type="DateTime" Name="Vencimiento" Nullable="false" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -325,6 +344,8 @@
                 <ScalarProperty Name="ID_rol" ColumnName="ID_rol" />
                 <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Vencimiento" ColumnName="Vencimiento" />
+                <ScalarProperty Name="temporal" ColumnName="temporal" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -351,6 +372,19 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RecuperarAccesoUsuario" FunctionName="ProyPrograAvanModel.Store.RecuperarAccesoUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyPrograAvanModel.RecuperarAccesoUsuario_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Temporal" ColumnName="Temporal" />
+                <ScalarProperty Name="Vencimiento" ColumnName="Vencimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="RegistrarHabitacion" FunctionName="ProyPrograAvanModel.Store.RegistrarHabitacion" />
           <FunctionImportMapping FunctionImportName="RegistrarReserva" FunctionName="ProyPrograAvanModel.Store.RegistrarReserva" />
           <FunctionImportMapping FunctionImportName="RegistrarUsuario" FunctionName="ProyPrograAvanModel.Store.RegistrarUsuario" />
@@ -368,7 +402,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

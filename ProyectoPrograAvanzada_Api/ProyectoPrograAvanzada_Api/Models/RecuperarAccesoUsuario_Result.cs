@@ -11,16 +11,14 @@ namespace ProyectoPrograAvanzada_Api.Models
 {
     using System;
     
-    public partial class ConsultarUsuarios_Result
+    public partial class RecuperarAccesoUsuario_Result
     {
         public long id_usuario { get; set; }
+        public string contrasena { get; set; }
         public string nombre { get; set; }
         public string correo_electronico { get; set; }
-        public string contrasena { get; set; }
-        public Nullable<long> ID_rol { get; set; }
-        public string nombre_rol { get; set; }
-        public Nullable<bool> estado { get; set; }
+        public Nullable<bool> Estado { get; set; }
+        public bool Temporal { get; set; }
         public System.DateTime Vencimiento { get; set; }
-        public bool temporal { get; set; }
     }
 }

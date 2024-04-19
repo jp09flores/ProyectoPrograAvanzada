@@ -223,6 +223,19 @@ namespace ProyectoPrograAvanzada_Api.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IniciarSesionUsuario_Result>("IniciarSesionUsuario", correo_electronicoParameter, contrasenaParameter);
         }
     
+        public virtual ObjectResult<RecuperarAccesoUsuario_Result> RecuperarAccesoUsuario(string nombre, string correo_electronico)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var correo_electronicoParameter = correo_electronico != null ?
+                new ObjectParameter("correo_electronico", correo_electronico) :
+                new ObjectParameter("correo_electronico", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RecuperarAccesoUsuario_Result>("RecuperarAccesoUsuario", nombreParameter, correo_electronicoParameter);
+        }
+    
         public virtual int RegistrarHabitacion(string tipo_habitacion, Nullable<int> capacidad, Nullable<decimal> tarifa, string img, Nullable<long> iD_localidad)
         {
             var tipo_habitacionParameter = tipo_habitacion != null ?

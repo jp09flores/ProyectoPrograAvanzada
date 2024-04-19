@@ -68,5 +68,25 @@ namespace Practica1.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult RecuperarAcceso()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RecuperarAcceso(Usuarios entidad)
+        {
+            var respuesta = modelo.RecuperarAccesoUsuario(entidad);
+
+            if (respuesta.Codigo == 0)
+                return RedirectToAction("IniciarSesion", "Inicio");
+            else
+            {
+                ViewBag.MsjPantalla = respuesta.Detalle;
+                return View();
+            }
+        }
+
     }
 }

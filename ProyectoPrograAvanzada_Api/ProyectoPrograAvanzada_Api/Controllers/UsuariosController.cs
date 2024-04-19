@@ -2,6 +2,7 @@
 using ProyectoPrograAvanzada_Api.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,6 +12,7 @@ namespace ProyectoPrograAvanzada_Api.Controllers
 {
     public class UsuariosController : ApiController
     {
+       CorreosModel model = new CorreosModel();
 
         [HttpPost]
         [Route("Usuarios/InicioSesion")]
@@ -215,5 +217,46 @@ namespace ProyectoPrograAvanzada_Api.Controllers
 
             return respuesta;
         }
+
+        [HttpPost]
+        [Route("Usuarios/RecuperarAccesoUsuario")]
+        public Confirmacion RecuperarAccesoUsuario(Usuarios entidad)
+        {
+            
+            var respuesta = new Confirmacion();
+
+            try
+            {
+                using (var db = new ProyPrograAvanEntities())
+                {
+                    var datos = db.RecuperarAccesoUsuario(entidad.nombre, entidad.correo_electronico).FirstOrDefault();
+
+                    if (datos != null)
+                    {
+                        string ruta = AppDomain.CurrentDomain.BaseDirectory + "Password.html";
+                        string contenido = File.ReadAllText(ruta);
+                        contenido = contenido.Replace("@@Nombre", datos.nombre);
+                        contenido = contenido.Replace("@@Contrasenna", datos.contrasena);
+                        contenido = contenido.Replace("@@Vencimiento", datos.Vencimiento.ToString("dd/MM/yyyy hh:mm:ss tt"));
+                        model.EnviarCorreo(datos.correo_electronico, "Acceso Temporal", contenido);
+                        respuesta.Codigo = 0;
+                        respuesta.Detalle = string.Empty;
+                    }
+                    else
+                    {
+                        respuesta.Codigo = -1;
+                        respuesta.Detalle = "No se pudo validar su información";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                respuesta.Codigo = -1;
+                respuesta.Detalle = "Se presentó un error en el sistema";
+            }
+
+            return respuesta;
+        }
     }
 }
+

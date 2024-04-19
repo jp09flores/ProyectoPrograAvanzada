@@ -12,8 +12,12 @@ namespace ProyectoPrograAvanzada_Api.Entidades
         public string correo_electronico { get; set; }
         public string contrasena { get; set; }
         public long ID_rol { get; set; }
-        public bool estado { get; set; }
+        public bool Estado { get; set; }
         public string nombre_rol { get; set; }
+
+        public string Temporal { get; set; }
+
+        public string Vencimiento { get; set; }
     }
     public class ConfirmacionUsuarios
     {

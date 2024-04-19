@@ -506,6 +506,7 @@
     <Content Include="Views\Usuarios\ActualizarUsuarios.cshtml" />
     <Content Include="Views\UHabitaciones\ConsultarUHabitaciones.cshtml" />
     <Content Include="Views\UHabitaciones\RegistroFinalUHabitacion.cshtml" />
+    <Content Include="Views\Inicio\RecuperarAcceso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

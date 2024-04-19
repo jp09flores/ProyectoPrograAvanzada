@@ -96,5 +96,19 @@ namespace ProyectoPrograAvanzada.Entidades
                     return null;
             }
         }
+        public Confirmacion RecuperarAccesoUsuario(Usuarios entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                url += "Usuarios/RecuperarAccesoUsuario";
+                JsonContent jsonEntidad = JsonContent.Create(entidad);
+                var respuesta = client.PostAsync(url, jsonEntidad).Result;
+
+                if (respuesta.IsSuccessStatusCode)
+                    return respuesta.Content.ReadFromJsonAsync<Confirmacion>().Result;
+                else
+                    return null;
+            }
+        }
     }
 }

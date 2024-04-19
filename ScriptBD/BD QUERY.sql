@@ -25,6 +25,8 @@ CREATE TABLE Usuarios (
   contrasena VARCHAR(255),
   ID_rol BIGINT,
   estado bit,
+  Vencimiento datetime NOT NULL,
+  Temporal bit NOT NULL,
   FOREIGN KEY (ID_rol) REFERENCES Roles(ID_rol)
 );
 
@@ -82,9 +84,9 @@ INSERT INTO Roles (nombre_rol) VALUES ('Administrador');
 INSERT INTO Roles (nombre_rol) VALUES ('Usuario');
 
 -- Inserts para la tabla Usuarios
-INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado) VALUES ('Ana Martínez', 'ana@example.com', 'clave123', 2, 1);
-INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado) VALUES ('Carlos Rodríguez', 'carlos@example.com', 'seguridad456', 1, 1);
-INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado) VALUES ('Sofía López', 'sofia@example.com', 'contraseña789', 2, 1);
+INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado,Vencimiento,Temporal) VALUES ('Ana Martínez', 'ana@example.com', 'clave123', 2, 1,'2024-04-18 14:30:00',1);
+INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado,Vencimiento,Temporal) VALUES ('Carlos Rodríguez', 'carlos@example.com', 'seguridad456', 1, 1,'2024-04-18 14:30:00',1);
+INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado,Vencimiento,Temporal) VALUES ('Sofía López', 'sofia@example.com', 'contraseña789', 2, 1,'2024-04-18 14:30:00',1);
 
 -- Inserts para la tabla Localidades
 INSERT INTO Localidades ( nombre_localidad) VALUES ( 'Guanacaste');
@@ -400,6 +402,8 @@ SELECT [id_usuario]
       ,u.[ID_rol]
 	  ,r.nombre_rol
       ,[estado]
+	  ,[Vencimiento]
+	  ,[temporal]
   FROM Usuarios u
   join roles r on u.ID_rol = r.ID_rol
     
@@ -491,3 +495,30 @@ END
 
 
 -- ===============================================
+Create PROCEDURE [dbo].[RecuperarAccesoUsuario]
+	@nombre		varchar(20),
+    @CorreoElectronico	varchar(200)
+AS
+BEGIN
+
+	DECLARE @id_usuario BIGINT
+
+	SELECT	@id_usuario = id_usuario
+	FROM	dbo.Usuarios WHERE	nombre = @nombre 
+						AND correo_electronico = @CorreoElectronico
+						AND Estado = 1
+
+	IF @id_usuario IS NOT NULL
+	BEGIN
+		UPDATE	Usuarios
+		SET		contrasena = LEFT(NEWID(),8),
+				Temporal = 1,
+				Vencimiento = DATEADD(HOUR, 1, GETDATE())  
+		WHERE	id_usuario = @id_usuario
+	END
+
+	SELECT	id_usuario,contrasena,Nombre,correo_electronico,Estado,Temporal,Vencimiento
+	FROM	dbo.Usuarios
+	WHERE	id_usuario = @id_usuario
+
+END
