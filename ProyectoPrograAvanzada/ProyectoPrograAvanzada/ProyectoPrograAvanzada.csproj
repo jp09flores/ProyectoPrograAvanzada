@@ -507,6 +507,7 @@
     <Content Include="Views\UHabitaciones\ConsultarUHabitaciones.cshtml" />
     <Content Include="Views\UHabitaciones\RegistroFinalUHabitacion.cshtml" />
     <Content Include="Views\Inicio\RecuperarAcceso.cshtml" />
+    <Content Include="Views\Inicio\CambioContrasena.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -80,7 +80,25 @@ namespace Practica1.Controllers
             var respuesta = modelo.RecuperarAccesoUsuario(entidad);
 
             if (respuesta.Codigo == 0)
-                return RedirectToAction("IniciarSesion", "Inicio");
+                return RedirectToAction("InicioSesion", "Inicio");
+            else
+            {
+                ViewBag.MsjPantalla = respuesta.Detalle;
+                return View();
+            }
+        }
+        [HttpGet]
+        public ActionResult CambioContrasena()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CambioContrasena(Usuarios entidad)
+        {
+            var respuesta = modelo.CambiarContrasena(entidad);
+
+            if (respuesta.Codigo == 0)
+                return RedirectToAction("InicioSesion", "Inicio");
             else
             {
                 ViewBag.MsjPantalla = respuesta.Detalle;

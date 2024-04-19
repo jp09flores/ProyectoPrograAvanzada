@@ -1,0 +1,88 @@
+﻿
+@model ProyectoPrograAvanzada.Entidades.Usuarios
+
+@{
+    ViewBag.Title = "CambioContraseña";
+    Layout = "~/Views/Shared/_LayoutExterno.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center" style="margin-top:5%">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-3 d-none d-lg-block"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h3 class="h4 text-gray-900 mb-4">Recuperar Acceso</h3>
+                                </div>
+                                @if (ViewBag.MsjPantalla != null)
+                                {
+                                    <div class="alert alert-warning" role="alert" style="text-align:center">
+                                        @ViewBag.MsjPantalla
+                                    </div>
+                                }
+
+                                @using (Html.BeginForm("CambioContrasena", "Inicio", FormMethod.Post))
+                                {
+
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.correo_electronico, new { @class = "form-control form-control-user", @placeholder = "Correo Electrónico", @type = "Email", @required = "true" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.codigo, new { @class = "form-control form-control-user", @placeholder = "Contrasena temporal", @required = "true" })
+
+                                    </div>
+                                    <p> Si no tiene codigo, dirijase al siguiente link: <a href="@Url.Action("RecuperarAcceso","Inicio")"> Aqui</a></p>
+                                    <div class="form-group">
+                                        @Html.PasswordFor(m => m.contrasena, new { @class = "form-control form-control-user", @id = "contrasena", @placeholder = "Nueva contraseña", @required = "true" })
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" id="confirmacionContrasena" class="form-control form-control-user" required="true" placeholder="Confirmar contraseña" />
+                                    </div>
+
+                                    <input type="submit" class="btn btn-primary btn-user btn-block" value="Procesar" onclick="return Validar(event);">
+                                }
+                                <script>
+                                    function Validar(event) {
+                                        var confirmacion = document.getElementById('confirmacionContrasena').value;
+                                        var contrasena = document.getElementById('contrasena').value;
+
+
+                                        if (confirmacion != contrasena) {
+
+                                            MostrarAlert("error", "Las contraseñas tienen que ser iguales");
+                                            event.preventDefault();
+                                            return false;
+                                        }
+
+                                    }
+                                    function MostrarAlert(icono, mensaje) {
+                                        Swal.fire({
+                                            position: "center",
+                                            icon: icono,
+                                            title: mensaje,
+                                            showConfirmButton: false,
+                                            timer: 2500
+                                        });
+                                    }
+                                </script>
+
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="@Url.Action("IniciarSesion","Inicio")">Iniciar Sesión</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="@Url.Action("RegistrarUsuario","Inicio")">Crear cuenta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

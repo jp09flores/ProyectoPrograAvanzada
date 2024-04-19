@@ -18,12 +18,15 @@
                                 <div class="text-center">
                                     <h3 class="h4 text-gray-900 mb-4">Recuperar Acceso</h3>
                                 </div>
-
-                                @using (Html.BeginForm("RecuperarAcceso", "inicio", FormMethod.Post))
+                                @if (ViewBag.MsjPantalla != null)
                                 {
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.nombre, new { @class = "form-control form-control-user", @placeholder = "Identificación", @required = "true" })
+                                    <div class="alert alert-warning" role="alert" style="text-align:center">
+                                        @ViewBag.MsjPantalla
                                     </div>
+                                }
+                                @using (Html.BeginForm("RecuperarAcceso", "Inicio", FormMethod.Post))
+                                {
+
                                     <div class="form-group">
                                         @Html.TextBoxFor(m => m.correo_electronico, new { @class = "form-control form-control-user", @placeholder = "Correo Electrónico", @type = "Email", @required = "true" })
                                     </div>
@@ -34,6 +37,9 @@
                                 <hr>
                                 <div class="text-center">
                                     <a class="small" href="@Url.Action("IniciarSesion","Inicio")">Iniciar Sesión</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="@Url.Action("CambioContrasena","Inicio")">Cambiar contraseña</a>
                                 </div>
                                 <div class="text-center">
                                     <a class="small" href="@Url.Action("RegistrarUsuario","Inicio")">Crear cuenta</a>

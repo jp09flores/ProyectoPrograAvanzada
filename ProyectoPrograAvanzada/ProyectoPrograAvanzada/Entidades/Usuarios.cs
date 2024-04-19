@@ -14,6 +14,8 @@ namespace ProyectoPrograAvanzada.Entidades
         public bool estado { get; set; }
         public long ID_rol { get; set; }
         public string nombre_rol { get; set; }
+
+        public string codigo { get; set; }
     }
     public class ConfirmacionUsuarios
     {

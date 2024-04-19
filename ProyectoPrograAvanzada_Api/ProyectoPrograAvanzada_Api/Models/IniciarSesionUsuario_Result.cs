@@ -19,5 +19,7 @@ namespace ProyectoPrograAvanzada_Api.Models
         public string contrasena { get; set; }
         public Nullable<long> ID_rol { get; set; }
         public string nombre_rol { get; set; }
+        public bool Temporal { get; set; }
+        public System.DateTime Vencimiento { get; set; }
     }
 }

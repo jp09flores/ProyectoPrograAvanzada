@@ -17,7 +17,7 @@ namespace ProyectoPrograAvanzada_Api.Models
         public string contrasena { get; set; }
         public string nombre { get; set; }
         public string correo_electronico { get; set; }
-        public Nullable<bool> Estado { get; set; }
+        public Nullable<bool> estado { get; set; }
         public bool Temporal { get; set; }
         public System.DateTime Vencimiento { get; set; }
     }

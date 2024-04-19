@@ -437,12 +437,11 @@ BEGIN
      IF NOT EXISTS(SELECT 1 FROM dbo.Usuarios WHERE correo_electronico = @CorreoElectronico)
     BEGIN
 
-          INSERT INTO dbo.Usuarios(Nombre, correo_electronico, Contrasena, ID_rol,estado)
-    VALUES (@Nombre, @CorreoElectronico, @Contrasena, 2,1)
+          INSERT INTO dbo.Usuarios(Nombre, correo_electronico, Contrasena, ID_rol,estado,Vencimiento,Temporal)
+    VALUES (@Nombre, @CorreoElectronico, @Contrasena, 2,1,GETDATE(),1)
     END
 
 END
-GO
 
 -- ------------------Update---------------------
 
@@ -480,21 +479,20 @@ GO
 
 
 -- -------------------Inicio Sesion -------------
+
 Create PROCEDURE [dbo].[IniciarSesionUsuario]
     @correo_electronico    VARCHAR(200),
     @contrasena          VARCHAR(10)
 AS
 BEGIN
     
-        SELECT id_usuario, nombre, correo_electronico,contrasena, u.ID_rol, r.nombre_rol
+        SELECT id_usuario, nombre, correo_electronico,contrasena, u.ID_rol, r.nombre_rol,Temporal,Vencimiento
         FROM dbo.Usuarios u  
         INNER JOIN dbo.Roles R ON U.ID_rol = R.ID_rol
         WHERE U.correo_electronico = @correo_electronico AND U.contrasena = @contrasena and estado = 1 
     
 END
-
-
--- ===============================================
+-- -------------------RecuperarAcceso -------------
 Create PROCEDURE [dbo].[RecuperarAccesoUsuario]
 	@nombre		varchar(20),
     @CorreoElectronico	varchar(200)
@@ -522,3 +520,29 @@ BEGIN
 	WHERE	id_usuario = @id_usuario
 
 END
+
+
+-- -------------------CambiarContrasena-------------
+Create PROCEDURE [dbo].[CambiarContrasena]
+    
+    @correo_electronico VARCHAR(255),
+	@codigo VARCHAR(255),
+    @contrasena VARCHAR(255)
+AS
+BEGIN
+
+	DECLARE @id_usuario BIGINT
+	select @id_usuario = id_usuario from Usuarios where correo_electronico = @correo_electronico and contrasena = @codigo and Temporal =1
+
+   if @id_usuario is not null
+   begin 
+     UPDATE Usuarios
+    SET 
+		Temporal = 0,
+        contrasena = @contrasena
+        
+    WHERE id_usuario = @id_usuario;
+   end 
+END
+GO
+-- ===============================================

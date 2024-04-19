@@ -28,11 +28,17 @@ namespace ProyectoPrograAvanzada_Api.Controllers
 
                     if (datos != null)
                     {
-                      
+                        if (datos.Temporal && DateTime.Now > datos.Vencimiento)
+                        {
+                            respuesta.Codigo = -1;
+                            respuesta.Detalle = "Su contraseña temporal ha caducado";
+                        }
+                        else
+                        {
                             respuesta.Codigo = 0;
                             respuesta.Detalle = string.Empty;
                             respuesta.Dato = datos;
-                        
+                        }
                     }
                     else
                     {
@@ -229,7 +235,7 @@ namespace ProyectoPrograAvanzada_Api.Controllers
             {
                 using (var db = new ProyPrograAvanEntities())
                 {
-                    var datos = db.RecuperarAccesoUsuario(entidad.nombre, entidad.correo_electronico).FirstOrDefault();
+                    var datos = db.RecuperarAccesoUsuario(entidad.correo_electronico).FirstOrDefault();
 
                     if (datos != null)
                     {
@@ -238,14 +244,23 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                         contenido = contenido.Replace("@@Nombre", datos.nombre);
                         contenido = contenido.Replace("@@Contrasenna", datos.contrasena);
                         contenido = contenido.Replace("@@Vencimiento", datos.Vencimiento.ToString("dd/MM/yyyy hh:mm:ss tt"));
-                        model.EnviarCorreo(datos.correo_electronico, "Acceso Temporal", contenido);
-                        respuesta.Codigo = 0;
-                        respuesta.Detalle = string.Empty;
+                        try {
+                            model.EnviarCorreo(datos.correo_electronico, "Acceso Temporal", contenido);
+                            respuesta.Codigo = 0;
+                            respuesta.Detalle = string.Empty;
+                        }
+                        catch (Exception)
+                        {
+                            respuesta.Codigo = -1;
+                            respuesta.Detalle = "Correo no valido";
+                        }
+
+                        
                     }
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se pudo validar su información";
+                        respuesta.Detalle = "Datos no validos";
                     }
                 }
             }
@@ -257,6 +272,42 @@ namespace ProyectoPrograAvanzada_Api.Controllers
 
             return respuesta;
         }
+        [HttpPost]
+        [Route("Usuarios/CambiarContrasena")]
+        public ConfirmacionUsuarios CambiarContrasena(Usuarios entidad)
+        {
+            var respuesta = new ConfirmacionUsuarios();
+
+            try
+            {
+                using (var db = new ProyPrograAvanEntities())
+                {
+                    var resp = db.CambiarContrasena(entidad.correo_electronico, entidad.codigo, entidad.contrasena);
+
+                    if (resp >0)
+                    {
+                       
+                       
+                            respuesta.Codigo = 0;
+                            respuesta.Detalle = string.Empty;
+                        
+                    }
+                    else
+                    {
+                        respuesta.Codigo = -1;
+                        respuesta.Detalle = "El contraseña temporal no esta vigente, vuelva a recuperar acceso";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                respuesta.Codigo = -1;
+                respuesta.Detalle = "Se presentó un error en el sistema";
+            }
+
+            return respuesta;
+        }
+
     }
 }
 
