@@ -76,17 +76,17 @@ BEGIN
     
 END
 -- Inserts para la tabla Logs
-INSERT INTO Logs (fecha_registro, descripcion) VALUES ('2024-03-22 10:00:00', 'Usuario Juan inició sesión.');
-INSERT INTO Logs (fecha_registro, descripcion) VALUES ('2024-03-22 11:30:00', 'Error: No se pudo completar la transacción.');
+INSERT INTO Logs (fecha_registro, descripcion) VALUES ('2024-03-22 10:00:00', 'Usuario Juan iniciÃ³ sesiÃ³n.');
+INSERT INTO Logs (fecha_registro, descripcion) VALUES ('2024-03-22 11:30:00', 'Error: No se pudo completar la transacciÃ³n.');
 
 -- Inserts para la tabla Roles
 INSERT INTO Roles (nombre_rol) VALUES ('Administrador');
 INSERT INTO Roles (nombre_rol) VALUES ('Usuario');
 
 -- Inserts para la tabla Usuarios
-INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado,Vencimiento,Temporal) VALUES ('Ana Martínez', 'ana@example.com', 'clave123', 2, 1,'2024-04-18 14:30:00',1);
-INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado,Vencimiento,Temporal) VALUES ('Carlos Rodríguez', 'carlos@example.com', 'seguridad456', 1, 1,'2024-04-18 14:30:00',1);
-INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado,Vencimiento,Temporal) VALUES ('Sofía López', 'sofia@example.com', 'contraseña789', 2, 1,'2024-04-18 14:30:00',1);
+INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado,Vencimiento,Temporal) VALUES ('Ana MartÃ­nez', 'ana@example.com', 'clave123', 2, 1,'2024-04-18 14:30:00',0);
+INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado,Vencimiento,Temporal) VALUES ('Carlos RodrÃ­guez', 'carlos@example.com', 'seguridad456', 1, 1,'2024-04-18 14:30:00',0);
+INSERT INTO Usuarios (nombre, correo_electronico, contrasena, ID_rol, estado,Vencimiento,Temporal) VALUES ('SofÃ­a LÃ³pez', 'sofia@example.com', 'contraseÃ±a789', 2, 1,'2024-04-18 14:30:00',0);
 
 -- Inserts para la tabla Localidades
 INSERT INTO Localidades ( nombre_localidad) VALUES ( 'Guanacaste');
@@ -104,8 +104,8 @@ INSERT INTO Reservas (id_usuario, ID_habitacion, fecha_entrada, fecha_salida, se
 INSERT INTO Reservas (id_usuario, ID_habitacion, fecha_entrada, fecha_salida, servicios_adicionales,estado) VALUES (2, 2, '2024-05-20', '2024-05-25', 'Wifi gratis',1);
 
 -- Inserts para la tabla Opiniones
-INSERT INTO Opiniones (id_usuario, ID_reserva, opinion_texto) VALUES (1, 1, 'Excelente servicio, habitación limpia y cómoda.');
-INSERT INTO Opiniones (id_usuario, ID_reserva, opinion_texto) VALUES (2, 2, 'Buena ubicación, personal amable.');
+INSERT INTO Opiniones (id_usuario, ID_reserva, opinion_texto) VALUES (1, 1, 'Excelente servicio, habitaciÃ³n limpia y cÃ³moda.');
+INSERT INTO Opiniones (id_usuario, ID_reserva, opinion_texto) VALUES (2, 2, 'Buena ubicaciÃ³n, personal amable.');
 
 
 
@@ -301,7 +301,7 @@ GO
 
 -- ------------------Insert---------------------
 
-CREATE PROCEDURE [dbo].[RegistrarReserva]
+create PROCEDURE [dbo].[RegistrarReserva]
     @id_usuario BIGINT,
     @ID_habitacion BIGINT,
     @fecha_entrada DATETIME,
@@ -309,13 +309,20 @@ CREATE PROCEDURE [dbo].[RegistrarReserva]
     @servicios_adicionales VARCHAR(255)
 AS
 BEGIN
-	 IF NOT EXISTS(SELECT 1 FROM Reservas WHERE id_usuario = @id_usuario and ID_habitacion = @ID_habitacion and fecha_entrada =@fecha_entrada)
+    IF NOT EXISTS(
+        SELECT 1 
+        FROM Reservas 
+        WHERE ID_habitacion = @ID_habitacion
+          AND (
+               (fecha_entrada BETWEEN @fecha_entrada AND @fecha_salida)
+            OR (fecha_salida BETWEEN @fecha_entrada AND @fecha_salida)
+            OR (fecha_entrada <= @fecha_entrada AND fecha_salida >= @fecha_salida)
+          )
+    )
     BEGIN
-        INSERT INTO Reservas(id_usuario, ID_habitacion, fecha_entrada, fecha_salida, servicios_adicionales,estado)
-    VALUES (@id_usuario, @ID_habitacion, @fecha_entrada, @fecha_salida, @servicios_adicionales,1);
-
+        INSERT INTO Reservas(id_usuario, ID_habitacion, fecha_entrada, fecha_salida, servicios_adicionales, estado)
+        VALUES (@id_usuario, @ID_habitacion, @fecha_entrada, @fecha_salida, @servicios_adicionales, 1);
     END
-   
 END
 GO
 
@@ -438,7 +445,7 @@ BEGIN
     BEGIN
 
           INSERT INTO dbo.Usuarios(Nombre, correo_electronico, Contrasena, ID_rol,estado,Vencimiento,Temporal)
-    VALUES (@Nombre, @CorreoElectronico, @Contrasena, 2,1,GETDATE(),1)
+    VALUES (@Nombre, @CorreoElectronico, @Contrasena, 2,1,GETDATE(),0)
     END
 
 END
