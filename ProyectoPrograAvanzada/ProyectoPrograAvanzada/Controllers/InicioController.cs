@@ -29,8 +29,9 @@ namespace Practica1.Controllers
                 Session["NombreUsuario"] = respuesta.Dato.nombre;
                 Session["RolUsuario"] = respuesta.Dato.ID_rol;
                 Session["NombreRol"] = respuesta.Dato.nombre_rol;
+                Session["CorreoUsuario"] = respuesta.Dato.correo_electronico;
+                Session["idUsuario"] = respuesta.Dato.id_usuario;
 
-               
                 return RedirectToAction("PaginaPrincipal", "Inicio");
             }
             else

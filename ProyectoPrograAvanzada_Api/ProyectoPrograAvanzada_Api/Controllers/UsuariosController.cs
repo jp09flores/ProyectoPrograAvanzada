@@ -235,13 +235,13 @@ namespace ProyectoPrograAvanzada_Api.Controllers
             {
                 using (var db = new ProyPrograAvanEntities())
                 {
-                    var datos = db.RecuperarAccesoUsuario(entidad.correo_electronico).FirstOrDefault();
+                    var datos = db.RecuperarAccesoUsuario(entidad.nombre, entidad.correo_electronico).FirstOrDefault();
 
                     if (datos != null)
                     {
                         string ruta = AppDomain.CurrentDomain.BaseDirectory + "Password.html";
                         string contenido = File.ReadAllText(ruta);
-                        contenido = contenido.Replace("@@Nombre", datos.nombre);
+                        contenido = contenido.Replace("@@Nombre", datos.Nombre);
                         contenido = contenido.Replace("@@Contrasenna", datos.contrasena);
                         contenido = contenido.Replace("@@Vencimiento", datos.Vencimiento.ToString("dd/MM/yyyy hh:mm:ss tt"));
                         try {
@@ -254,8 +254,6 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                             respuesta.Codigo = -1;
                             respuesta.Detalle = "Correo no valido";
                         }
-
-                        
                     }
                     else
                     {

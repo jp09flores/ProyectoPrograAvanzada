@@ -16,6 +16,7 @@ namespace ProyectoPrograAvanzada_Api.Entidades
         public string servicios_adicionales { get; set; }
         public bool estado { get; set; }
         public string nombre_usuario { get; set; }
+        public string correo_usuario { get; set; }
     }
     public class ConfirmacionReservas
     {

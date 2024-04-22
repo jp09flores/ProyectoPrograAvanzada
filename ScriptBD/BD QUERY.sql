@@ -361,7 +361,7 @@ BEGIN
 END
 GO
  ----------------------------- -----------------------
- create PROCEDURE [dbo].[ConsultarUsuariosAdmin]
+Create PROCEDURE [dbo].[ConsultarUsuariosAdmin]
 AS
 BEGIN
    
