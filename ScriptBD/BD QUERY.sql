@@ -360,20 +360,26 @@ BEGIN
     WHERE ID_reserva = @ID_reserva;
 END
 GO
- ----------------------------- -----------------------
-Create PROCEDURE [dbo].[ConsultarUsuariosAdmin]
+ --------------------Get Ultimo Reserva------------------
+
+
+	CREATE PROCEDURE [dbo].[GetUltimaReserva]
 AS
 BEGIN
-   
+    SET NOCOUNT ON;
 
-SELECT [id_usuario]
-      ,[nombre]
-  FROM [dbo].[Usuarios]
-  where estado = 1;
+    IF EXISTS(SELECT 1 FROM [Reservas])
+    BEGIN
+        DECLARE @ultimoID BIGINT;
+        SELECT @ultimoID = MAX([ID_reserva]) FROM [Reservas];
 
-
-
-
+        IF @ultimoID IS NOT NULL
+        BEGIN
+            SELECT [ID_reserva], [id_usuario], [ID_habitacion], [fecha_entrada], [fecha_salida], [servicios_adicionales], [estado]
+            FROM [Reservas]
+            WHERE [ID_reserva] = @ultimoID;
+END
+    END
 END
 GO
 -- ===============================================
@@ -550,6 +556,23 @@ BEGIN
         
     WHERE id_usuario = @id_usuario;
    end 
+END
+GO
+
+-- ---------------------ConsultarUsuariosAdmin
+Create PROCEDURE [dbo].[ConsultarUsuariosAdmin]
+AS
+BEGIN
+   
+
+SELECT [id_usuario]
+      ,[nombre]
+  FROM [dbo].[Usuarios]
+  where estado = 1;
+
+
+
+
 END
 GO
 -- ===============================================
