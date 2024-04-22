@@ -301,7 +301,7 @@ GO
 
 -- ------------------Insert---------------------
 
-create PROCEDURE [dbo].[RegistrarReserva]
+Create PROCEDURE [dbo].[RegistrarReserva]
     @id_usuario BIGINT,
     @ID_habitacion BIGINT,
     @fecha_entrada DATETIME,
@@ -380,6 +380,59 @@ BEGIN
             WHERE [ID_reserva] = @ultimoID;
 END
     END
+END
+GO
+
+ --------------------TraerReservaXUsuario------------------
+ Create PROCEDURE [dbo].[ConsultarReservaUsuario]
+    @id_usuario BIGINT,
+	@uno bit
+AS
+BEGIN
+    If (@uno = 1)
+	begin 
+	 SELECT r.ID_reserva ,
+           r.id_usuario ,
+           r.ID_habitacion,
+		   h.tipo_habitacion,
+           r.fecha_entrada ,
+           r.fecha_salida ,
+           r.servicios_adicionales,
+		   r.estado,
+		   u.nombre as 'nombre_usuario'
+    FROM Reservas r
+	join Usuarios u on u.id_usuario = r.id_usuario
+	join Habitaciones h on h.ID_habitacion = r.ID_habitacion
+    WHERE r.id_usuario = @id_usuario and r.estado = 1;
+	end 
+	else 
+	begin 
+	SELECT r.ID_reserva ,
+           r.id_usuario ,
+           r.ID_habitacion,
+		   h.tipo_habitacion,
+           r.fecha_entrada ,
+           r.fecha_salida ,
+           r.servicios_adicionales,
+		   r.estado,
+		   u.nombre as 'nombre_usuario'
+    FROM Reservas r
+	join Usuarios u on u.id_usuario = r.id_usuario
+	join Habitaciones h on h.ID_habitacion = r.ID_habitacion
+    WHERE r.id_usuario = @id_usuario and r.estado = 0;
+	end 
+END
+GO
+
+
+-- ------------------Delete---------------------
+
+CREATE PROCEDURE [dbo].[EliminadoTotalReserva]
+    @ID_reserva BIGINT
+AS
+BEGIN
+    Delete from Reservas
+	where ID_reserva = @ID_reserva
 END
 GO
 -- ===============================================
@@ -528,7 +581,7 @@ BEGIN
 		WHERE	id_usuario = @id_usuario
 	END
 
-	SELECT	id_usuario,contrasena,Nombre,correo_electronico,Estado,Temporal,Vencimiento
+	SELECT	id_usuario,contrasena,nombre,correo_electronico,estado,Temporal,Vencimiento
 	FROM	dbo.Usuarios
 	WHERE	id_usuario = @id_usuario
 

@@ -10,12 +10,12 @@ using System.Web.Mvc;
 namespace ProyectoPrograAvanzada.Controllers
 {
     [FiltroSeguridad]
-    [FiltroAdmin]
+    
     public class ReservasController : Controller
     {
         ReservasModel modelo = new ReservasModel();
         HabitacionModel modelohabitaciones = new HabitacionModel();
-
+        [FiltroAdmin]
         [HttpGet]
         public ActionResult MostrarReservas()
         {
@@ -30,6 +30,7 @@ namespace ProyectoPrograAvanzada.Controllers
                 return View(new List<Reservas>());
             }
         }
+        [FiltroAdmin]
         [HttpGet]
         public ActionResult RegistroReservas()
         {
@@ -37,6 +38,7 @@ namespace ProyectoPrograAvanzada.Controllers
             CargarViewBagUsuarios();
             return View();
         }
+        [FiltroAdmin]
         [HttpPost]
         public ActionResult RegistroReservas(Reservas entidad)
         {
@@ -54,7 +56,7 @@ namespace ProyectoPrograAvanzada.Controllers
                 return View();
             }
         }
-
+        [FiltroAdmin]
         [HttpGet]
         public ActionResult ActualizarReservas(long id)
         {
@@ -86,6 +88,22 @@ namespace ProyectoPrograAvanzada.Controllers
         public ActionResult EliminarReservas(long id)
         {
             var respuesta = modelo.EliminarReservas(id);
+
+            if (respuesta.Codigo == 0)
+            {
+
+                return RedirectToAction("MostrarReservas", "Reservas");
+            }
+            else
+            {
+                ViewBag.MsjPantalla = respuesta.Detalle;
+                return View();
+            }
+        }
+        [HttpGet]
+        public ActionResult EliminarReservasTotal(long id)
+        {
+            var respuesta = modelo.EliminarReservasTotal(id);
 
             if (respuesta.Codigo == 0)
             {
@@ -136,7 +154,7 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             ViewBag.Habitaciones = habitaciones;
         }
-
+       
 
     }
 }

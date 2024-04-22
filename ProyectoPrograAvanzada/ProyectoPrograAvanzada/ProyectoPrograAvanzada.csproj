@@ -510,6 +510,8 @@
     <Content Include="Views\Inicio\RecuperarAcceso.cshtml" />
     <Content Include="Views\Inicio\CambioContrasena.cshtml" />
     <Content Include="Views\UHabitaciones\Confirmacion.cshtml" />
+    <Content Include="Views\UHabitaciones\ConsultarReservaUsuario.cshtml" />
+    <Content Include="Views\UHabitaciones\ActualizarReservas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

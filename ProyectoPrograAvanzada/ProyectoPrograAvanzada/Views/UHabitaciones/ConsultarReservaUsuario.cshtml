@@ -1,0 +1,74 @@
+﻿@model List<ProyectoPrograAvanzada.Entidades.Reservas>
+@{
+    ViewBag.Title = "MostrarReservas";
+}
+<div class="container">
+
+    <div class="card shadow mb-4 mt-5">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Reservas</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            @if (ViewBag.MsjPantalla != null)
+                            {
+                                <div class="alert alert-warning" role="alert" style="text-align:center">
+                                    @ViewBag.MsjPantalla
+                                </div>
+                            }
+
+
+                        <table class="table table-bordered dataTable" style="width: 100%;">
+                            <thead>
+                                <tr role="row">
+                                    <th>Tipo de Habitación</th>
+                                    <th>Fecha de Entrada</th>
+                                    <th>Fecha de Salida</th>
+                                    <th>Servicios Adicionales</th>
+                                    <th>Nombre de Usuario</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                <tbody>
+
+                                    <tr class="odd">
+                                        <td>@item.tipo_habitacion</td>
+                                        <td>@item.fecha_entrada</td>
+                                        <td>@item.fecha_salida</td>
+                                        <td>@item.servicios_adicionales</td>
+                                        <td>@item.nombre_usuario</td>
+                                        <td style="text-align:center">
+                                            <a href="@Url.Action("ActualizarReservas","UHabitaciones", new { id = @item.ID_reserva })">ACTUALIZAR</a>
+                                            
+                                                <a href="@Url.Action("EliminarReservasTotal","Reservas", new { id = @item.ID_reserva })">ELIMINAR</a>
+                                            
+
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                                <tfoot>
+
+                                    <tr>
+                                        <td colspan="8" class="text-center">
+                                            <a class="btn btn-success"href="@Url.Action("EnviarCorreo","UHabitaciones", new { id = @item.ID_reserva })">Confirmar Reserva</a>
+                                        </td>
+
+                                    </tr>
+                                </tfoot>
+                            }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

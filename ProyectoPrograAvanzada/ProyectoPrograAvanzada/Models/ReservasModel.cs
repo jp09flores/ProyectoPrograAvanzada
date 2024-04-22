@@ -97,5 +97,18 @@ namespace ProyectoPrograAvanzada.Models
                     return null;
             }
         }
+        public Confirmacion EliminarReservasTotal(long Consecutivo)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = ConfigurationManager.AppSettings["urlApi"] + "Reservas/EliminarReservaTotal?Consecutivo=" + Consecutivo;
+                var respuesta = client.DeleteAsync(url).Result;
+
+                if (respuesta.IsSuccessStatusCode)
+                    return respuesta.Content.ReadFromJsonAsync<Confirmacion>().Result;
+                else
+                    return null;
+            }
+        }
     }
 }

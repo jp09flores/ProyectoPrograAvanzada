@@ -11,14 +11,13 @@ namespace ProyectoPrograAvanzada_Api.Models
 {
     using System;
     
-    public partial class RecuperarAccesoUsuario_Result
+    public partial class ConsultarCasas_Result
     {
-        public long id_usuario { get; set; }
-        public string contrasena { get; set; }
-        public string nombre { get; set; }
-        public string correo_electronico { get; set; }
-        public Nullable<bool> estado { get; set; }
-        public bool Temporal { get; set; }
-        public System.DateTime Vencimiento { get; set; }
+        public long IdCasa { get; set; }
+        public string DescripcionCasa { get; set; }
+        public decimal PrecioCasa { get; set; }
+        public string UsuarioAlquiler { get; set; }
+        public string Estado { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
     }
 }

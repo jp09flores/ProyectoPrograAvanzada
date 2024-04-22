@@ -11,14 +11,12 @@ namespace ProyectoPrograAvanzada_Api.Models
 {
     using System;
     
-    public partial class GetUltimaReserva_Result
+    public partial class ConsultarCasaUno_Result
     {
-        public long ID_reserva { get; set; }
-        public Nullable<long> id_usuario { get; set; }
-        public Nullable<long> ID_habitacion { get; set; }
-        public Nullable<System.DateTime> fecha_entrada { get; set; }
-        public Nullable<System.DateTime> fecha_salida { get; set; }
-        public string servicios_adicionales { get; set; }
-        public Nullable<bool> estado { get; set; }
+        public long IdCasa { get; set; }
+        public string DescripcionCasa { get; set; }
+        public decimal PrecioCasa { get; set; }
+        public string UsuarioAlquiler { get; set; }
+        public Nullable<System.DateTime> FechaAlquiler { get; set; }
     }
 }

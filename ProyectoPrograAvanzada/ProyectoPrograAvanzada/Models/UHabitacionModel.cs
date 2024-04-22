@@ -56,5 +56,34 @@ namespace ProyectoPrograAvanzada.Models
                     return null;
             }
         }
+        public ConfirmacionReservas ConsultarReservasUno(long id)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = ConfigurationManager.AppSettings["urlApi"] + "UHabitaciones/ConsultarReservaUno?id_usuario="+id;
+                var respuesta = client.GetAsync(url).Result;
+
+                if (respuesta.IsSuccessStatusCode)
+                    return respuesta.Content.ReadFromJsonAsync<ConfirmacionReservas>().Result;
+                else
+                    return null;
+            }
+        }
+        public Confirmacion EnviarCorreo(Reservas entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = ConfigurationManager.AppSettings["urlApi"];
+
+                url += "UHabitaciones/EnviarCorreo";
+                JsonContent jsonEntidad = JsonContent.Create(entidad);
+                var respuesta = client.PostAsync(url, jsonEntidad).Result;
+
+                if (respuesta.IsSuccessStatusCode)
+                    return respuesta.Content.ReadFromJsonAsync<Confirmacion>().Result;
+                else
+                    return null;
+            }
+        }
     }
 }

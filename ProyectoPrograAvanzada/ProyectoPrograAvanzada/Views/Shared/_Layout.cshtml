@@ -72,6 +72,7 @@
                      <div class="navbar-nav ml-auto py-0">
                          <a href="@Url.Action("PaginaPrincipal","Inicio")" class="nav-item nav-link active">Home</a>
                          <a href="@Url.Action("ConsultarUHabitaciones","UHabitaciones")" class="nav-item nav-link">Habitaciones</a>
+                         <a href="@Url.Action("ConsultarReservaUsuario","UHabitaciones")" class="nav-item nav-link">Carrito</a>
                          @if (Session["RolUsuario"] != null && Session["RolUsuario"].ToString() == "1")
                          {
                              <div class="nav-item dropdown">
@@ -84,7 +85,7 @@
                                  </div>
                              </div>
                          }
-                         
+
                      </div>
                  </div>
              </nav>
