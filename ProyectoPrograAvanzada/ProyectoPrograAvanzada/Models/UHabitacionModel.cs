@@ -85,5 +85,18 @@ namespace ProyectoPrograAvanzada.Models
                     return null;
             }
         }
+        public ConfirmacionReservas Historial(long id)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = ConfigurationManager.AppSettings["urlApi"] + "UHabitaciones/ConsultarHistorial?id_usuario=" + id;
+                var respuesta = client.GetAsync(url).Result;
+
+                if (respuesta.IsSuccessStatusCode)
+                    return respuesta.Content.ReadFromJsonAsync<ConfirmacionReservas>().Result;
+                else
+                    return null;
+            }
+        }
     }
 }

@@ -128,6 +128,22 @@ namespace ProyectoPrograAvanzada.Controllers
             CargarViewBagHabitaciones();
             return View(resp.Dato);
         }
+        [FiltroSeguridad]
+        [HttpGet]
+        public ActionResult ConsultarReservaHistorial()
+        {
+            var respuesta = modelo.Historial(long.Parse(Session["idUsuario"].ToString()));
+
+            if (respuesta.Codigo == 0)
+            {
+                return View(respuesta.Datos);
+            }
+            else
+            {
+                ViewBag.MsjPantalla = respuesta.Detalle;
+                return View(new List<Reservas>());
+            }
+        }
         private void CargarViewBagHabitaciones()
         {
             var respuesta = modelohabitaciones.ConsultarHabitaciones(false);

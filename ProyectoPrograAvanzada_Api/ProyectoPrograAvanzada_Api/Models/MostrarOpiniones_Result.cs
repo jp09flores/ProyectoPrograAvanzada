@@ -11,13 +11,11 @@ namespace ProyectoPrograAvanzada_Api.Models
 {
     using System;
     
-    public partial class ConsultarCasas_Result
+    public partial class MostrarOpiniones_Result
     {
-        public long IdCasa { get; set; }
-        public string DescripcionCasa { get; set; }
-        public decimal PrecioCasa { get; set; }
-        public string UsuarioAlquiler { get; set; }
-        public string Estado { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
+        public long ID_opinion { get; set; }
+        public Nullable<long> id_usuario { get; set; }
+        public Nullable<long> ID_reserva { get; set; }
+        public string opinion_texto { get; set; }
     }
 }

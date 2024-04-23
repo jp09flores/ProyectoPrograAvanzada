@@ -1,0 +1,51 @@
+﻿
+
+@model ProyectoPrograAvanzada.Entidades.Opiniones
+@{
+    ViewBag.Title = "RegistrarOpiniones";
+}
+
+<div class="container mt-5">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Registro Opiniones</h6>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                            @if (ViewBag.MsjPantalla != null)
+                            {
+                                <div class="alert alert-warning" role="alert" style="text-align:center">
+                                    @ViewBag.MsjPantalla
+                                </div>
+                            }
+
+                            @using (Html.BeginForm("RegistrarOpiniones", "Opiniones", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    @Html.Label("Habitaciones")
+                                    @Html.DropDownListFor(m => m.ID_reserva, ViewBag.Reserva as List<SelectListItem>, new { @class = "form-control form-control-user", @required = "true" })
+                                </div>
+                               
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.opinion_texto, new { @class = "form-control form-control-user", @placeholder = "La opinion la habitacion", @required = "true" })
+                                </div>
+
+
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar">
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
