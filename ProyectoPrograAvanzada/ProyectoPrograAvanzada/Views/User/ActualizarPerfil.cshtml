@@ -1,0 +1,87 @@
+﻿@model ProyectoPrograAvanzada.Entidades.Usuarios
+@{
+    ViewBag.Title = "ActualizarPerfil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Usuarios</h6>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                            @if (ViewBag.MsjPantalla != null)
+                            {
+                                <div class="alert alert-warning" role="alert" style="text-align:center">
+                                    @ViewBag.MsjPantalla
+                                </div>
+                            }
+
+                            @using (Html.BeginForm("ActualizarPerfil", "User", FormMethod.Post))
+                            {
+
+                                <div class="form-group">
+                                    @Html.Label("Nombre")
+                                    @Html.TextBoxFor(m => m.nombre, new { @class = "form-control form-control-user", @placeholder = "Nombre", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Correo")
+                                    @Html.TextBoxFor(m => m.correo_electronico, new { @class = "form-control form-control-user", @placeholder = "Correo", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Contrasena")
+                                    @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control form-control-user", @placeholder = "Contraseña", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="confirmacionContrasena" class="form-control form-control-user" required="true" placeholder="Confirmar contraseña" />
+                                </div>
+
+
+
+
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar" onclick="return Validar(event);">
+                                }
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                                <script>
+
+                                    function Validar(event) {
+                                        var confirmacion = document.getElementById('confirmacionContrasena').value;
+                                        var contrasena = document.getElementById('contrasena').value;
+
+
+                                        if (confirmacion != contrasena) {
+
+                                            MostrarAlert("error", "Las contraseñas tienen que ser iguales");
+                                            event.preventDefault();
+                                            return false;
+                                        }
+
+                                    }
+                                    function MostrarAlert(icono, mensaje) {
+                                        Swal.fire({
+                                            position: "center",
+                                            icon: icono,
+                                            title: mensaje,
+                                            showConfirmButton: false,
+                                            timer: 2500
+                                        });
+                                    };
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+

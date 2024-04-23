@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
+<div class="container my-5">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary"> Gestión de Reservas </h6>
@@ -33,11 +33,11 @@
                                
                                 <div class="form-group">
                                     @Html.Label("Fecha entrada")
-                                    @Html.TextBoxFor(m => m.fecha_entrada, new { @class = "form-control form-control-user", @placeholder = "Fecha entrada", @type = "datetime-local", @required = "true" })
+                                    @Html.TextBoxFor(m => m.fecha_entrada, new { @class = "form-control form-control-user", @placeholder = "Fecha entrada", @type = "date", @required = "true" })
                                 </div>
                                 <div class="form-group">
                                     @Html.Label("Fecha salida")
-                                    @Html.TextBoxFor(m => m.fecha_salida, new { @class = "form-control form-control-user", @placeholder = "Fecha salida", @type = "datetime-local", @required = "true" })
+                                    @Html.TextBoxFor(m => m.fecha_salida, new { @class = "form-control form-control-user", @placeholder = "Fecha salida", @type = "date", @required = "true" })
                                 </div>
                                 <div class="form-group">
                                     @Html.Label("Servicios adicionales")

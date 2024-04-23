@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
 
 namespace ProyectoPrograAvanzada.Controllers
@@ -15,6 +16,7 @@ namespace ProyectoPrograAvanzada.Controllers
     {
         ReservasModel modelo = new ReservasModel();
         HabitacionModel modelohabitaciones = new HabitacionModel();
+        ErrorModel modeloError = new ErrorModel();
         [FiltroAdmin]
         [HttpGet]
         public ActionResult MostrarReservas()
@@ -26,6 +28,12 @@ namespace ProyectoPrograAvanzada.Controllers
                 return View(respuesta.Datos);
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+                
+                modeloError.RegistrarError(entidadError);
+
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View(new List<Reservas>());
             }
@@ -52,6 +60,13 @@ namespace ProyectoPrograAvanzada.Controllers
                 return RedirectToAction("MostrarReservas", "Reservas");
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+                
+                modeloError.RegistrarError(entidadError);
+
+                CargarViewBagHabitaciones();
+                CargarViewBagUsuarios();
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }
@@ -61,6 +76,13 @@ namespace ProyectoPrograAvanzada.Controllers
         public ActionResult ActualizarReservas(long id)
         {
             var resp = modelo.ConsultarReserva(id);
+            if (resp.Codigo == -1)
+            {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = resp.Detalle;
+               
+                modeloError.RegistrarError(entidadError);
+            }
             CargarViewBagHabitaciones();
             CargarViewBagUsuarios();
             resp.Dato.ID_reserva = id;
@@ -78,6 +100,11 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+           
+                modeloError.RegistrarError(entidadError);
+
                 CargarViewBagHabitaciones();
                 CargarViewBagUsuarios();
                 ViewBag.MsjPantalla = respuesta.Detalle;
@@ -96,6 +123,11 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+             
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }
@@ -112,6 +144,11 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+               
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }
@@ -130,6 +167,11 @@ namespace ProyectoPrograAvanzada.Controllers
                     usuarios.Add(new SelectListItem { Text = item.nombre, Value = item.id_usuario.ToString() });
             }
             else {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 usuarios.Add(new SelectListItem { Text = "No hay datos", Value = "" });
             }
 
@@ -150,6 +192,11 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 habitaciones.Add(new SelectListItem { Text = "No hay datos", Value = "" });
             }
             ViewBag.Habitaciones = habitaciones;

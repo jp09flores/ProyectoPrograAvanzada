@@ -15,6 +15,7 @@ namespace ProyectoPrograAvanzada.Controllers
     public class HabitacionesController : Controller
     {
         HabitacionModel modelo = new HabitacionModel();
+        ErrorModel modeloError = new ErrorModel();
 
         [HttpGet]
         public ActionResult MostrarHabitaciones()
@@ -25,6 +26,11 @@ namespace ProyectoPrograAvanzada.Controllers
                 return View(respuesta.Datos);
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View(new List<Habitaciones>());
             }
@@ -44,6 +50,12 @@ namespace ProyectoPrograAvanzada.Controllers
                 return RedirectToAction("MostrarHabitaciones", "Habitaciones");
             else
             {
+                CargarViewBagLocalidad();
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }
@@ -53,6 +65,13 @@ namespace ProyectoPrograAvanzada.Controllers
         public ActionResult ActualizarHabitaciones(long id)
         {
             var resp = modelo.ConsultarHabitacion(id);
+            if (resp.Codigo == -1)
+            {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = resp.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+            }
             CargarViewBagLocalidad();
              resp.Dato.ID_habitacion =id;
             return View(resp.Dato);
@@ -71,6 +90,11 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 CargarViewBagLocalidad();
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
@@ -87,6 +111,10 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }

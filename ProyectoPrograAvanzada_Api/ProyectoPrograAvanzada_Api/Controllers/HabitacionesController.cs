@@ -32,14 +32,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se encontraron resultados";
+                        respuesta.Detalle = "No se encontraron resultados para las habitaciones";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,ConsultarHabitaciones";
             }
 
             return respuesta;
@@ -65,14 +65,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se encontraron resultados";
+                        respuesta.Detalle = "No se encontraron resultados para las localidades";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,ConsultarLocalidad";
             }
 
             return respuesta;
@@ -99,14 +99,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se encontraron resultados";
+                        respuesta.Detalle = "No se encontraron resultados para consultar habitacion";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,ConsultarHabitacion";
             }
 
             return respuesta;
@@ -132,14 +132,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "Su información ya se encuentra registrada";
+                        respuesta.Detalle = "La informacion de registro de la habitacion ya se encuentra regitrada";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,RegistrarHabitacion";
             }
 
             return respuesta;
@@ -167,14 +167,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "El producto no se pudo actualizar";
+                        respuesta.Detalle = "La habitacion no se pudo actualizar";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,ActualizarHabitacion";
             }
 
             return respuesta;
@@ -200,14 +200,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "El producto no se pudo eliminar";
+                        respuesta.Detalle = "La habitacion no se pudo eliminar";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,EliminarHabitacion";
             }
 
             return respuesta;

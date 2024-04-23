@@ -5,14 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
 
 namespace ProyectoPrograAvanzada.Controllers
 {
+    [FiltroSeguridad]
+    [FiltroUsuario]
     public class OpinionesController : Controller
     {
         OpinionesModel modelo = new OpinionesModel();
         UHabitacionModel modeloU = new UHabitacionModel();
+        ErrorModel modeloError = new ErrorModel();
 
         [HttpGet]
         public ActionResult MostrarOpiniones()
@@ -23,6 +27,11 @@ namespace ProyectoPrograAvanzada.Controllers
                 return View(respuesta.Datos);
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View(new List<Opiniones>());
             }
@@ -43,6 +52,11 @@ namespace ProyectoPrograAvanzada.Controllers
                 return RedirectToAction("MostrarOpiniones", "Opiniones");
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }
@@ -60,6 +74,11 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 Reserva.Add(new SelectListItem { Text = "No hay datos", Value = "" });
             }
             ViewBag.Reserva = Reserva;

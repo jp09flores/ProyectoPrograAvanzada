@@ -32,14 +32,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se encontraron resultados";
+                        respuesta.Detalle = "No se encontraron resultados de las reservas";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,ConsultarReservas";
             }
 
             return respuesta;
@@ -66,14 +66,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se encontraron resultados";
+                        respuesta.Detalle = "No se encontraron resultados para la reserva seleccionada";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,ConsultarReserva";
             }
 
             return respuesta;
@@ -99,14 +99,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "Su información ya se encuentra registrada";
+                        respuesta.Detalle = "La información de las reserva ya se encuentra registrada";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,RegistrarReserva";
             }
 
             return respuesta;
@@ -134,14 +134,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "El producto no se pudo actualizar";
+                        respuesta.Detalle = "La reserva no se pudo actualizar";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,ActualizarReserva";
             }
 
             return respuesta;
@@ -167,14 +167,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "El producto no se pudo eliminar";
+                        respuesta.Detalle = "La reserva no se pudo eliminar";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,EliminarReserva";
             }
 
             return respuesta;
@@ -235,14 +235,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "El producto no se pudo eliminar";
+                        respuesta.Detalle = "La reserva no se pudo eliminar totalmente";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,EliminarReservaTotal";
             }
 
             return respuesta;

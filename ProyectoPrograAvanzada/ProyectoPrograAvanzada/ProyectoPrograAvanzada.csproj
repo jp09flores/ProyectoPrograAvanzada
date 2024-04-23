@@ -162,13 +162,17 @@
     <Compile Include="Controllers\OpinionesController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
     <Compile Include="Controllers\UHabitacionesController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Entidades\Errores.cs" />
     <Compile Include="Entidades\Confirmacion.cs" />
     <Compile Include="Entidades\Opiniones.cs" />
     <Compile Include="Entidades\Localidad.cs" />
     <Compile Include="Entidades\Habitaciones.cs" />
     <Compile Include="Entidades\Reservas.cs" />
     <Compile Include="Entidades\Usuarios.cs" />
+    <Compile Include="Models\ErrorModel.cs" />
+    <Compile Include="Models\FiltroUsuario.cs" />
     <Compile Include="Models\OpinionesModel.cs" />
     <Compile Include="Models\UHabitacionModel.cs" />
     <Compile Include="Models\UsuariosModel.cs" />
@@ -517,6 +521,7 @@
     <Content Include="Views\UHabitaciones\ActualizarReservas.cshtml" />
     <Content Include="Views\Opiniones\MostrarOpiniones.cshtml" />
     <Content Include="Views\Opiniones\RegistrarOpiniones.cshtml" />
+    <Content Include="Views\User\ActualizarPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -45,7 +45,7 @@ namespace ProyectoPrograAvanzada_Api.Controllers
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,RegistroFinal";
             }
 
             return respuesta;
@@ -73,14 +73,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se encontraron resultados";
+                        respuesta.Detalle = "No se encontraron resultados para consultar la reserva";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,ConsultarReservaUno";
             }
 
             return respuesta;
@@ -115,14 +115,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     catch (Exception)
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "Correo no Válido";
+                        respuesta.Detalle = "Correo no Válido para enviar correo confirmacion";
                     }
                 
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,UHabitaciones/EnviarCorreo";
             }
 
             return respuesta;
@@ -148,14 +148,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se encontraron resultados";
+                        respuesta.Detalle = "No se encontraron resultados para el historial";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,ConsultarHistorial";
             }
 
             return respuesta;

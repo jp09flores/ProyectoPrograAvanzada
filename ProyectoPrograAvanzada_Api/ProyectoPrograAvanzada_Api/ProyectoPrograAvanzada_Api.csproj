@@ -162,12 +162,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ErroresController.cs" />
     <Compile Include="Controllers\OpinionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
     <Compile Include="Controllers\HabitacionesController.cs" />
     <Compile Include="Controllers\UHabitacionesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Entidades\Errores.cs" />
     <Compile Include="Entidades\Confirmacion.cs" />
     <Compile Include="Entidades\Opiniones.cs" />
     <Compile Include="Entidades\Localidad.cs" />
@@ -206,9 +208,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CorreosModel.cs" />
-    <Compile Include="Models\GetUltimaReserva_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IniciarSesionUsuario_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

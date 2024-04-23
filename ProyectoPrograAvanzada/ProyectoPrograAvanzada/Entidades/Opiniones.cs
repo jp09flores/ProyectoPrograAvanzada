@@ -7,7 +7,7 @@ namespace ProyectoPrograAvanzada.Entidades
 {
     public class Opiniones
     {
-        public long Id_opinon { get; set; }
+        public long ID_opinion { get; set; }
         public long id_usuario { get; set; }
 
         public long ID_reserva { get; set; }

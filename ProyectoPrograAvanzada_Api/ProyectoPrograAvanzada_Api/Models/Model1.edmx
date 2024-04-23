@@ -41,6 +41,12 @@
           <Parameter Name="codigo" Type="varchar" Mode="In" />
           <Parameter Name="contrasena" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="ConsultarCasas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MostrarTodos" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ConsultarCasaUno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Consecutivo" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="ConsultarHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Consecutivo" Type="bigint" Mode="In" />
         </Function>
@@ -75,15 +81,21 @@
         <Function Name="EliminarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_usuario" Type="bigint" Mode="In" />
         </Function>
-        <Function Name="GetUltimaReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GuardarErrores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="IniciarSesionUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="correo_electronico" Type="varchar" Mode="In" />
           <Parameter Name="contrasena" Type="varchar" Mode="In" />
         </Function>
         <Function Name="MostrarOpiniones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="RecuperarAccesoUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nombre" Type="varchar" Mode="In" />
           <Parameter Name="CorreoElectronico" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="RegistrarAlquiler" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCasa" Type="bigint" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="UsuarioAlquiler" Type="varchar" Mode="In" />
         </Function>
         <Function Name="RegistrarHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tipo_habitacion" Type="varchar" Mode="In" />
@@ -147,6 +159,12 @@
             <Parameter Name="codigo" Mode="In" Type="String" />
             <Parameter Name="contrasena" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ConsultarCasas">
+            <Parameter Name="MostrarTodos" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarCasaUno">
+            <Parameter Name="Consecutivo" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="ConsultarHabitacion" ReturnType="Collection(ProyPrograAvanModel.ConsultarHabitacion_Result)">
             <Parameter Name="Consecutivo" Mode="In" Type="Int64" />
           </FunctionImport>
@@ -181,15 +199,21 @@
           <FunctionImport Name="EliminarUsuario">
             <Parameter Name="id_usuario" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="GetUltimaReserva" ReturnType="Collection(ProyPrograAvanModel.GetUltimaReserva_Result)" />
+          <FunctionImport Name="GuardarErrores">
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="IniciarSesionUsuario" ReturnType="Collection(ProyPrograAvanModel.IniciarSesionUsuario_Result)">
             <Parameter Name="correo_electronico" Mode="In" Type="String" />
             <Parameter Name="contrasena" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="MostrarOpiniones" ReturnType="Collection(ProyPrograAvanModel.MostrarOpiniones_Result)" />
           <FunctionImport Name="RecuperarAccesoUsuario" ReturnType="Collection(ProyPrograAvanModel.RecuperarAccesoUsuario_Result)">
-            <Parameter Name="nombre" Mode="In" Type="String" />
             <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RegistrarAlquiler">
+            <Parameter Name="IdCasa" Mode="In" Type="Int64" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="UsuarioAlquiler" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="RegistrarHabitacion">
             <Parameter Name="tipo_habitacion" Mode="In" Type="String" />
@@ -285,15 +309,6 @@
           <Property Type="Int64" Name="id_usuario" Nullable="false" />
           <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
         </ComplexType>
-        <ComplexType Name="GetUltimaReserva_Result">
-          <Property Type="Int64" Name="ID_reserva" Nullable="false" />
-          <Property Type="Int64" Name="id_usuario" Nullable="true" />
-          <Property Type="Int64" Name="ID_habitacion" Nullable="true" />
-          <Property Type="DateTime" Name="fecha_entrada" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="fecha_salida" Nullable="true" Precision="23" />
-          <Property Type="String" Name="servicios_adicionales" Nullable="true" MaxLength="255" />
-          <Property Type="Boolean" Name="estado" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="IniciarSesionUsuario_Result">
           <Property Type="Int64" Name="id_usuario" Nullable="false" />
           <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
@@ -330,6 +345,8 @@
           <FunctionImportMapping FunctionImportName="ActualizarUsuario" FunctionName="ProyPrograAvanModel.Store.ActualizarUsuario" />
           <FunctionImportMapping FunctionImportName="AgregarOpinion" FunctionName="ProyPrograAvanModel.Store.AgregarOpinion" />
           <FunctionImportMapping FunctionImportName="CambiarContrasena" FunctionName="ProyPrograAvanModel.Store.CambiarContrasena" />
+          <FunctionImportMapping FunctionImportName="ConsultarCasas" FunctionName="ProyPrograAvanModel.Store.ConsultarCasas" />
+          <FunctionImportMapping FunctionImportName="ConsultarCasaUno" FunctionName="ProyPrograAvanModel.Store.ConsultarCasaUno" />
           <FunctionImportMapping FunctionImportName="ConsultarHabitacion" FunctionName="ProyPrograAvanModel.Store.ConsultarHabitacion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ProyPrograAvanModel.ConsultarHabitacion_Result">
@@ -444,19 +461,7 @@
           <FunctionImportMapping FunctionImportName="EliminarHabitacion" FunctionName="ProyPrograAvanModel.Store.EliminarHabitacion" />
           <FunctionImportMapping FunctionImportName="EliminarReserva" FunctionName="ProyPrograAvanModel.Store.EliminarReserva" />
           <FunctionImportMapping FunctionImportName="EliminarUsuario" FunctionName="ProyPrograAvanModel.Store.EliminarUsuario" />
-          <FunctionImportMapping FunctionImportName="GetUltimaReserva" FunctionName="ProyPrograAvanModel.Store.GetUltimaReserva">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ProyPrograAvanModel.GetUltimaReserva_Result">
-                <ScalarProperty Name="ID_reserva" ColumnName="ID_reserva" />
-                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-                <ScalarProperty Name="ID_habitacion" ColumnName="ID_habitacion" />
-                <ScalarProperty Name="fecha_entrada" ColumnName="fecha_entrada" />
-                <ScalarProperty Name="fecha_salida" ColumnName="fecha_salida" />
-                <ScalarProperty Name="servicios_adicionales" ColumnName="servicios_adicionales" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GuardarErrores" FunctionName="ProyPrograAvanModel.Store.GuardarErrores" />
           <FunctionImportMapping FunctionImportName="IniciarSesionUsuario" FunctionName="ProyPrograAvanModel.Store.IniciarSesionUsuario">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ProyPrograAvanModel.IniciarSesionUsuario_Result">
@@ -494,6 +499,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RegistrarAlquiler" FunctionName="ProyPrograAvanModel.Store.RegistrarAlquiler" />
           <FunctionImportMapping FunctionImportName="RegistrarHabitacion" FunctionName="ProyPrograAvanModel.Store.RegistrarHabitacion" />
           <FunctionImportMapping FunctionImportName="RegistrarReserva" FunctionName="ProyPrograAvanModel.Store.RegistrarReserva" />
           <FunctionImportMapping FunctionImportName="RegistrarUsuario" FunctionName="ProyPrograAvanModel.Store.RegistrarUsuario" />
@@ -511,7 +517,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

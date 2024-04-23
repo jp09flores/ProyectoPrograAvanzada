@@ -9,16 +9,19 @@ using System.Web.Mvc;
 
 namespace ProyectoPrograAvanzada.Controllers
 {
+    [FiltroUsuario]
     public class UHabitacionesController : Controller
     {
         UHabitacionModel modelo = new UHabitacionModel();
         ReservasModel modeloReservas = new ReservasModel();
         HabitacionModel modelohabitaciones = new HabitacionModel();
 
+        ErrorModel modeloError = new ErrorModel();
+
         [HttpGet]
         public ActionResult ConsultarUHabitaciones()
         {
-            var respuesta = modelo.ConsultarHabitaciones(true);
+            var respuesta = modelo.ConsultarHabitaciones(false);
 
             if (respuesta.Codigo == 0)
             {
@@ -26,6 +29,11 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+                
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }
@@ -46,20 +54,43 @@ namespace ProyectoPrograAvanzada.Controllers
         [HttpPost]
         public ActionResult RegistroFinalUHabitacion(Reservas entidad)
         {
-            entidad.id_usuario = long.Parse(Session["idUsuario"].ToString());
+            TimeSpan horaDeseadaEntrada = new TimeSpan(13, 0, 0);
+            entidad.fecha_entrada += horaDeseadaEntrada;
+            TimeSpan horaDeseadaSalida = new TimeSpan(11, 0, 0);
+            entidad.fecha_salida += horaDeseadaSalida;
+           
+            var respuesta = modelo.ConsultarReservasUno(long.Parse(Session["idUsuario"].ToString()));
 
-
-
-            var resp = modelo.RegistroFinalUHabitacion(entidad);
-
-            if (resp.Codigo == 0)
-                return RedirectToAction("ConsultarReservaUsuario", "UHabitaciones");
-            else
+            if (respuesta.Codigo != 0)
             {
-                ViewBag.MsjPantalla = resp.Detalle;
+                entidad.id_usuario = long.Parse(Session["idUsuario"].ToString());
+                var resp = modelo.RegistroFinalUHabitacion(entidad);
+                if (resp.Codigo == 0)
+                    return RedirectToAction("ConsultarReservaUsuario", "UHabitaciones");
+                else
+                {
+                    Errores entidadError = new Errores();
+                    entidadError.descripcion = resp.Detalle;
+                    
+                    modeloError.RegistrarError(entidadError);
+
+                    ViewBag.MsjPantalla = resp.Detalle;
+                    return View(entidad);
+
+                }
+            }
+            else {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+                
+                modeloError.RegistrarError(entidadError);
+
+                ViewBag.MsjPantalla = "Ya tiene una reserva en el carrito";
                 return View(entidad);
             }
+            
         }
+    
         [FiltroSeguridad]
         [HttpGet]
         public ActionResult Confirmacion()
@@ -78,6 +109,11 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+                
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View(new List<Reservas>());
             }
@@ -109,6 +145,11 @@ namespace ProyectoPrograAvanzada.Controllers
                     return RedirectToAction("Confirmacion", "UHabitaciones");
                 }
                 else {
+                    Errores entidadError = new Errores();
+                    entidadError.descripcion = modifica.Detalle;
+                   
+                    modeloError.RegistrarError(entidadError);
+
                     ViewBag.MsjPantalla = respuesta.Detalle;
                     return View(entidad);
                 }
@@ -116,6 +157,11 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+                
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = resp.Detalle;
                 return View(entidad);
             }
@@ -126,6 +172,13 @@ namespace ProyectoPrograAvanzada.Controllers
             var resp = modeloReservas.ConsultarReserva(id);
             resp.Dato.ID_reserva = id;
             CargarViewBagHabitaciones();
+            if (resp.Codigo == -1)
+            {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = resp.Detalle;
+               
+                modeloError.RegistrarError(entidadError);
+            }
             return View(resp.Dato);
         }
         [FiltroSeguridad]
@@ -140,6 +193,11 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+               
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View(new List<Reservas>());
             }
@@ -147,6 +205,7 @@ namespace ProyectoPrograAvanzada.Controllers
         private void CargarViewBagHabitaciones()
         {
             var respuesta = modelohabitaciones.ConsultarHabitaciones(false);
+
             var habitaciones = new List<SelectListItem>();
 
 
@@ -159,6 +218,11 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+              
+                modeloError.RegistrarError(entidadError);
+
                 habitaciones.Add(new SelectListItem { Text = "No hay datos", Value = "" });
             }
             ViewBag.Habitaciones = habitaciones;

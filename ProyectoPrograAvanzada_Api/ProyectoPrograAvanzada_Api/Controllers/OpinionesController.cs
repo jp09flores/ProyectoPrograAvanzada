@@ -32,14 +32,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se encontraron resultados";
+                        respuesta.Detalle = "No se encontraron resultados para las opiniones";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,MostrarOpiniones";
             }
 
             return respuesta;
@@ -65,14 +65,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "Su información ya se encuentra registrada";
+                        respuesta.Detalle = "No se pudo registrar su opinion";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,RegistrarOpiniones";
             }
 
             return respuesta;

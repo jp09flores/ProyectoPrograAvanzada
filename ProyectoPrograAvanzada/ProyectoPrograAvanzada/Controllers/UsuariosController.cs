@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ProyectoPrograAvanzada.Controllers
 {
@@ -14,16 +16,23 @@ namespace ProyectoPrograAvanzada.Controllers
     public class UsuariosController : Controller
     {
         UsuariosModel modelo = new UsuariosModel();
+        ErrorModel modeloError = new ErrorModel();
+        
 
         [HttpGet]
         public ActionResult MostrarUsuarios()
         {
+
             var respuesta = modelo.ConsultarUsuarios();
 
             if (respuesta.Codigo == 0)
                 return View(respuesta.Datos);
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+               
+                modeloError.RegistrarError(entidadError);
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View(new List<Habitaciones>());
             }
@@ -42,6 +51,10 @@ namespace ProyectoPrograAvanzada.Controllers
                 return RedirectToAction("MostrarUsuarios", "Usuarios");
             else
             {
+                Errores entidadError= new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+               
+                modeloError.RegistrarError(entidadError);
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }
@@ -52,6 +65,12 @@ namespace ProyectoPrograAvanzada.Controllers
         {
             var resp = modelo.ConsultarUsuario(id);
             resp.Dato.id_usuario = id;
+            if (resp.Codigo == -1) {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = resp.Detalle;
+           
+                modeloError.RegistrarError(entidadError);
+            }
             return View(resp.Dato);
         }
         [HttpPost]
@@ -66,7 +85,10 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
                 
+                modeloError.RegistrarError(entidadError);
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }
@@ -82,6 +104,10 @@ namespace ProyectoPrograAvanzada.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+         
+                modeloError.RegistrarError(entidadError);
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }

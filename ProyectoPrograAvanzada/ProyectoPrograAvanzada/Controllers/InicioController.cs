@@ -12,7 +12,9 @@ namespace Practica1.Controllers
     public class InicioController : Controller
     {
         UsuariosModel modelo = new UsuariosModel();
-        // GET: Inicio
+        ErrorModel modeloError = new ErrorModel();
+
+
 
         [HttpGet]
         public ActionResult InicioSesion()
@@ -36,6 +38,11 @@ namespace Practica1.Controllers
             }
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }
@@ -63,6 +70,11 @@ namespace Practica1.Controllers
                 return RedirectToAction("InicioSesion", "Inicio");
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }
@@ -84,6 +96,11 @@ namespace Practica1.Controllers
                 return RedirectToAction("InicioSesion", "Inicio");
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }
@@ -102,6 +119,11 @@ namespace Practica1.Controllers
                 return RedirectToAction("InicioSesion", "Inicio");
             else
             {
+                Errores entidadError = new Errores();
+                entidadError.descripcion = respuesta.Detalle;
+
+                modeloError.RegistrarError(entidadError);
+
                 ViewBag.MsjPantalla = respuesta.Detalle;
                 return View();
             }

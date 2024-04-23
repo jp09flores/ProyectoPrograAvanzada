@@ -43,14 +43,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se pudo validar su información";
+                        respuesta.Detalle = "No se pudo validar su información en el inicio sesion";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,InicioSesion";
             }
 
             return respuesta;
@@ -77,14 +77,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "Su información ya se encuentra registrada";
+                        respuesta.Detalle = "Su información ya se encuentra registrada, por favor registre otra";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,Registro";
             }
 
             return respuesta;
@@ -111,14 +111,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se encontraron resultados";
+                        respuesta.Detalle = "No se encontraron resultados para los usuarios";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,ConsultaUsuarios";
             }
 
             return respuesta;
@@ -145,14 +145,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "No se encontraron resultados";
+                        respuesta.Detalle = "No se encontraron resultados para este usuario";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,ConsultarUsuario";
             }
 
             return respuesta;
@@ -178,14 +178,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "El producto no se pudo actualizar";
+                        respuesta.Detalle = "El usuario no se pudo actualizar";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,actualizarUsuario";
             }
 
             return respuesta;
@@ -211,68 +211,68 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "El producto no se pudo eliminar";
+                        respuesta.Detalle = "El usuario no se pudo eliminar";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,EliminarUsuario";
             }
 
             return respuesta;
         }
 
-        //[HttpPost]
-        //[Route("Usuarios/RecuperarAccesoUsuario")]
-        //public Confirmacion RecuperarAccesoUsuario(Usuarios entidad)
-        //{
+        [HttpPost]
+        [Route("Usuarios/RecuperarAccesoUsuario")]
+        public Confirmacion RecuperarAccesoUsuario(Usuarios entidad)
+        {
 
-        //    var respuesta = new Confirmacion();
+            var respuesta = new Confirmacion();
 
-        //    try
-        //    {
-        //        using (var db = new ProyPrograAvanEntities())
-        //        {
-        //            var datos = db.RecuperarAccesoUsuario(entidad.correo_electronico).FirstOrDefault();
+            try
+            {
+                using (var db = new ProyPrograAvanEntities())
+                {
+                    var datos = db.RecuperarAccesoUsuario(entidad.correo_electronico).FirstOrDefault();
 
-        //            if (datos != null)
-        //            {
-        //                string ruta = AppDomain.CurrentDomain.BaseDirectory + "Password.html";
-        //                string contenido = File.ReadAllText(ruta);
-        //                contenido = contenido.Replace("@@Nombre", datos.nombre);
-        //                contenido = contenido.Replace("@@Contrasenna", datos.contrasena);
-        //                contenido = contenido.Replace("@@Vencimiento", datos.Vencimiento.ToString("dd/MM/yyyy hh:mm:ss tt"));
-        //                try
-        //                {
-        //                    model.EnviarCorreo(datos.correo_electronico, "Acceso Temporal", contenido);
-        //                    respuesta.Codigo = 0;
-        //                    respuesta.Detalle = string.Empty;
-        //                }
-        //                catch (Exception)
-        //                {
-        //                    respuesta.Codigo = -1;
-        //                    respuesta.Detalle = "Correo no valido";
-        //                }
+                    if (datos != null)
+                    {
+                        string ruta = AppDomain.CurrentDomain.BaseDirectory + "Password.html";
+                        string contenido = File.ReadAllText(ruta);
+                        contenido = contenido.Replace("@@Nombre", datos.nombre);
+                        contenido = contenido.Replace("@@Contrasenna", datos.contrasena);
+                        contenido = contenido.Replace("@@Vencimiento", datos.Vencimiento.ToString("dd/MM/yyyy hh:mm:ss tt"));
+                        try
+                        {
+                            model.EnviarCorreo(datos.correo_electronico, "Acceso Temporal", contenido);
+                            respuesta.Codigo = 0;
+                            respuesta.Detalle = string.Empty;
+                        }
+                        catch (Exception)
+                        {
+                            respuesta.Codigo = -1;
+                            respuesta.Detalle = "Correo no valido para recuperar Acesso";
+                        }
 
 
-        //            }
-        //            else
-        //            {
-        //                respuesta.Codigo = -1;
-        //                respuesta.Detalle = "Datos no validos";
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        respuesta.Codigo = -1;
-        //        respuesta.Detalle = "Se presentó un error en el sistema";
-        //    }
+                    }
+                    else
+                    {
+                        respuesta.Codigo = -1;
+                        respuesta.Detalle = "Datos no validos para recupera acceso";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                respuesta.Codigo = -1;
+                respuesta.Detalle = "Se presentó un error en el sistema,RecuperarAccesoUsuario";
+            }
 
-        //    return respuesta;
-        //}
+            return respuesta;
+        }
         [HttpPost]
         [Route("Usuarios/CambiarContrasena")]
         public ConfirmacionUsuarios CambiarContrasena(Usuarios entidad)
@@ -296,14 +296,14 @@ namespace ProyectoPrograAvanzada_Api.Controllers
                     else
                     {
                         respuesta.Codigo = -1;
-                        respuesta.Detalle = "El contraseña temporal no esta vigente, vuelva a recuperar acceso";
+                        respuesta.Detalle = "El contraseña temporal no esta vigente para cambiar contraseña, vuelva a recuperar acceso";
                     }
                 }
             }
             catch (Exception)
             {
                 respuesta.Codigo = -1;
-                respuesta.Detalle = "Se presentó un error en el sistema";
+                respuesta.Detalle = "Se presentó un error en el sistema,CambiarContrasena";
             }
 
             return respuesta;

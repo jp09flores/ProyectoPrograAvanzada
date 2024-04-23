@@ -157,6 +157,24 @@ namespace ProyectoPrograAvanzada_Api.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CambiarContrasena", correo_electronicoParameter, codigoParameter, contrasenaParameter);
         }
     
+        public virtual int ConsultarCasas(Nullable<bool> mostrarTodos)
+        {
+            var mostrarTodosParameter = mostrarTodos.HasValue ?
+                new ObjectParameter("MostrarTodos", mostrarTodos) :
+                new ObjectParameter("MostrarTodos", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ConsultarCasas", mostrarTodosParameter);
+        }
+    
+        public virtual int ConsultarCasaUno(Nullable<long> consecutivo)
+        {
+            var consecutivoParameter = consecutivo.HasValue ?
+                new ObjectParameter("Consecutivo", consecutivo) :
+                new ObjectParameter("Consecutivo", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ConsultarCasaUno", consecutivoParameter);
+        }
+    
         public virtual ObjectResult<ConsultarHabitacion_Result> ConsultarHabitacion(Nullable<long> consecutivo)
         {
             var consecutivoParameter = consecutivo.HasValue ?
@@ -266,9 +284,13 @@ namespace ProyectoPrograAvanzada_Api.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarUsuario", id_usuarioParameter);
         }
     
-        public virtual ObjectResult<GetUltimaReserva_Result> GetUltimaReserva()
+        public virtual int GuardarErrores(string descripcion)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUltimaReserva_Result>("GetUltimaReserva");
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarErrores", descripcionParameter);
         }
     
         public virtual ObjectResult<IniciarSesionUsuario_Result> IniciarSesionUsuario(string correo_electronico, string contrasena)
@@ -289,17 +311,30 @@ namespace ProyectoPrograAvanzada_Api.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MostrarOpiniones_Result>("MostrarOpiniones");
         }
     
-        public virtual ObjectResult<RecuperarAccesoUsuario_Result> RecuperarAccesoUsuario(string nombre, string correoElectronico)
+        public virtual ObjectResult<RecuperarAccesoUsuario_Result> RecuperarAccesoUsuario(string correoElectronico)
         {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("nombre", nombre) :
-                new ObjectParameter("nombre", typeof(string));
-    
             var correoElectronicoParameter = correoElectronico != null ?
                 new ObjectParameter("CorreoElectronico", correoElectronico) :
                 new ObjectParameter("CorreoElectronico", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RecuperarAccesoUsuario_Result>("RecuperarAccesoUsuario", nombreParameter, correoElectronicoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RecuperarAccesoUsuario_Result>("RecuperarAccesoUsuario", correoElectronicoParameter);
+        }
+    
+        public virtual int RegistrarAlquiler(Nullable<long> idCasa, Nullable<System.DateTime> fecha, string usuarioAlquiler)
+        {
+            var idCasaParameter = idCasa.HasValue ?
+                new ObjectParameter("IdCasa", idCasa) :
+                new ObjectParameter("IdCasa", typeof(long));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
+    
+            var usuarioAlquilerParameter = usuarioAlquiler != null ?
+                new ObjectParameter("UsuarioAlquiler", usuarioAlquiler) :
+                new ObjectParameter("UsuarioAlquiler", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarAlquiler", idCasaParameter, fechaParameter, usuarioAlquilerParameter);
         }
     
         public virtual int RegistrarHabitacion(string tipo_habitacion, Nullable<int> capacidad, Nullable<decimal> tarifa, string img, Nullable<long> iD_localidad)

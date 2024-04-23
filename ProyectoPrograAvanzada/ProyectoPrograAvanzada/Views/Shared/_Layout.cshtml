@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>TRAVELER - Free Travel Website Template</title>
+    <title>StaySmart</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -20,141 +20,147 @@
 
     <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
+
 </head>
 
- <body>
-     <!-- Topbar Start -->
+<body>
+    <!-- Topbar Start -->
 
-     <div class="container-fluid bg-light pt-3 d-none d-lg-block">
-         <div class="container">
-             <div class="row">
-                 <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
-                     <div class="d-inline-flex align-items-center">
-                         <p><i class="fa fa-envelope mr-2"></i>StaSmart506@Gmail.com</p>
-                         <p class="text-body px-3">|</p>
-                         <p><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</p>
-                     </div>
-                 </div>
-                 <div class="col-lg-6 text-center text-lg-right">
-                     <div class="d-inline-flex align-items-center">
-                         <a class="text-primary px-3" href="">
-                             <i class="fab fa-facebook-f"></i>
-                         </a>
-                         <a class="text-primary px-3" href="">
-                             <i class="fab fa-twitter"></i>
-                         </a>
-                         <a class="text-primary px-3" href="">
-                             <i class="fab fa-linkedin-in"></i>
-                         </a>
-                         <a class="text-primary px-3" href="">
-                             <i class="fab fa-instagram"></i>
-                         </a>
-                         <a class="text-primary pl-3" href="">
-                             <i class="fab fa-youtube"></i>
-                         </a>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
-     <!-- Topbar End -->
-     <!-- Navbar Start -->
-     <div class="container-fluid position-relative nav-bar p-0">
-         <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
-             <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
-                 <a href="@Url.Action("PaginaPrincipal","Inicio")" class="navbar-brand">
-                     <h1 class="m-0 text-primary"><span class="text-dark">HOTEL</span> STAY SMART</h1>
-                 </a>
-                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                     <span class="navbar-toggler-icon"></span>
-                 </button>
-                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                     <div class="navbar-nav ml-auto py-0">
-                         <a href="@Url.Action("PaginaPrincipal","Inicio")" class="nav-item nav-link active">Home</a>
-                         <a href="@Url.Action("ConsultarUHabitaciones","UHabitaciones")" class="nav-item nav-link">Habitaciones</a>
-                         <a href="@Url.Action("ConsultarReservaUsuario","UHabitaciones")" class="nav-item nav-link">Carrito</a>
-                         @if (Session["RolUsuario"] != null && Session["RolUsuario"].ToString() == "1")
-                         {
-                             <div class="nav-item dropdown">
-                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Admin</a>
-                                 <div class="dropdown-menu border-0 rounded-0 m-0">
-                                     <a href="@Url.Action("MostrarHabitaciones","Habitaciones")" class="dropdown-item">Habitaciones</a>
-                                     <a href="@Url.Action("MostrarUsuarios","Usuarios")" class="dropdown-item">Usuarios</a>
-                                     <a href="@Url.Action("MostrarReservas","Reservas")" class="dropdown-item">Reservas</a>
+    <div class="container-fluid bg-light pt-3 d-none d-lg-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                    <div class="d-inline-flex align-items-center">
+                        <p><i class="fa fa-envelope mr-2"></i>StaSmart506@Gmail.com</p>
+                        <p class="text-body px-3">|</p>
+                        <p><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</p>
+                    </div>
+                </div>
 
-                                 </div>
-                             </div>
-                         }
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="">
+            <div class="container-fluid position-relative nav-bar p-0">
 
-                     </div>
-                 </div>
-             </nav>
-         </div>
-     </div>
-     <!-- Navbar End -->
+                <div class=" position-relative p-0 px-lg-3" style="z-index: 9; width: 100%;">
+                    <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+                        <a href="@Url.Action("PaginaPrincipal","Inicio")" class="navbar-brand">
+                            <h1 class="m-0 text-primary"><span class="text-dark">HOTEL</span> STAY SMART</h1>
+                        </a>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                            <div class="navbar-nav ml-auto py-0">
+                                <a href="@Url.Action("PaginaPrincipal", "Inicio")" class="nav-item nav-link active">Home</a>
+                                @if (Session["NombreUsuario"] != null)
+                                {
+                                    <div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@Session["NombreUsuario"].ToString()</a>
+                                        <div class="dropdown-menu border-0 rounded-0 m-0">
+                                            <a href="@Url.Action("ActualizarPerfil","User")" class="dropdown-item">Actualizar Informacion</a>
+                                            <a href="@Url.Action("CerrarSesion","User")" class="dropdown-item">Cerrar Sesion</a>
+                                        </div>
+                                    </div>
+                                }
+                                @if (Session["RolUsuario"] != null && Session["RolUsuario"].ToString() != "1")
+                                {
+                                    <a href="@Url.Action("ConsultarUHabitaciones","UHabitaciones")" class="nav-item nav-link">Habitaciones</a>
+                                    <a href="@Url.Action("ConsultarReservaUsuario","UHabitaciones")" class="nav-item nav-link">Carrito</a>
+                                    <a href="@Url.Action("MostrarOpiniones","Opiniones")" class="nav-item nav-link">Opiniones</a>
+                                }
 
-     @RenderBody()
-     
+                                @if (Session["RolUsuario"] != null && Session["RolUsuario"].ToString() == "1")
+                                {
+                                    <div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Admin</a>
+                                        <div class="dropdown-menu border-0 rounded-0 m-0">
+                                            <a href="@Url.Action("MostrarHabitaciones","Habitaciones")" class="dropdown-item">Habitaciones</a>
+                                            <a href="@Url.Action("MostrarUsuarios","Usuarios")" class="dropdown-item">Usuarios</a>
+                                            <a href="@Url.Action("MostrarReservas","Reservas")" class="dropdown-item">Reservas</a>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
 
 
 
+        </div>
+    </div>
+    <!-- Navbar End -->
 
-     <!-- Testimonial End -->
-     <!-- Footer Start -->
-     <div class="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">
-         <div class="row pt-5">
-             <div class="col-lg-6 col-md-8 mb-5">
-                 <a href="" class="navbar-brand">
-                     <h1 class="text-primary"><span class="text-white">HOTEL</span> STAY SMART</h1>
-                 </a>
-                 <p>
-                     Este hotel es un oasis de elegancia y confort en medio del paraíso tropical de Costa Rica. Con un diseño contemporáneo que se fusiona armoniosamente con la naturaleza circundante, ofrece habitaciones lujosas y bien equipadas, instalaciones de primera clase que incluyen una piscina serena y un spa rejuvenecedor, y una experiencia culinaria excepcional en sus restaurantes. Es el destino ideal para quienes buscan una escapada inolvidabl
-                     e donde relajarse y disfrutar de lo mejor que Costa Rica tiene para ofrecer.
-                 </p>
-                
-                
-             </div>
-
-             <div class="col-lg-3 col-md-6 mb-5">
-                 <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Contactenos </h5>
-                 <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
-                 <p><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</p>
-                 <p><i class="fa fa-envelope mr-2"></i>StaSmart506@Gmail.com</p>
-                 <div class="w-100">
-                 </div>
-             </div>
-         </div>
-     </div>
-     <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
-         <div class="row">
-             <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-                 <p class="m-0 text-white-50">
-                     Copyright &copy; <a href="#">Domain</a>. All Rights Reserved.</a>
-                 </p>
-             </div>
-             <div class="col-lg-6 text-center text-md-right">
-                 
-             </div>
-         </div>
-     </div>
-     <!-- Footer End -->
-     <!-- Back to Top -->
-     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    @RenderBody()
 
 
-     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-     <script src="/Estilos/lib/easing/easing.min.js"></script>
-     <script src="/Estilos/lib/owlcarousel/owl.carousel.min.js"></script>
-     <script src="/Estilos/lib/tempusdominus/js/moment.min.js"></script>
-     <script src="/Estilos/lib/tempusdominus/js/moment-timezone.min.js"></script>
-     <script src="/Estilos/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-
-     <!-- Your custom scripts -->
-     <script src="/Estilos/js/main.js"></script>
 
 
- </body>
+
+    <!-- Testimonial End -->
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">
+        <div class="row pt-5">
+            <div class="col-lg-6 col-md-8 mb-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="text-primary"><span class="text-white">HOTEL</span> STAY SMART</h1>
+                </a>
+                <p>
+                    Este hotel es un oasis de elegancia y comfort en medio del paraíso tropical de Costa Rica. Con un diseño contemporáneo que se fusiona armoniosamente con la naturaleza circundante, ofrece habitaciones lujosas y bien equipadas, instalaciones de primera clase que incluyen una piscina serena y un spa rejuvenecedor, y una experiencia culinaria excepcional en sus restaurantes. Es el destino ideal para quienes buscan una escapada inolvidable donde relajarse y disfrutar de lo mejor que Costa Rica tiene para ofrecer.
+                </p>
+
+
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Contactenos </h5>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</p>
+                <p><i class="fa fa-envelope mr-2"></i>StaSmart506@Gmail.com</p>
+                <div class="w-100">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
+        <div class="row">
+            <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
+                <p class="m-0 text-white-50">
+                    Copyright &copy; <a href="#">Domain</a>. All Rights Reserved.</a>
+                </p>
+            </div>
+            <div class="col-lg-6 text-center text-md-right">
+
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <script src="https://kit.fontawesome.com/1e8422fbf0.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+    <script src="/Estilos/lib/easing/easing.min.js"></script>
+    <script src="/Estilos/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/Estilos/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="/Estilos/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="/Estilos/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <!-- Your custom scripts -->
+    <script src="/Estilos/js/main.js"></script>
+
+
+</body>
 
 </html>

@@ -10,8 +10,8 @@
 </div>
 <div class="wrapper">
     <div class="inner-warpper text-center">
-        <h2 class="title mb-4">Registrase!</h2>
-        @using (Html.BeginForm("Registro", "Inicio", FormMethod.Post))
+        <h2 class="title mb-4">Registrarse!</h2>
+        @using (Html.BeginForm("Registro", "Inicio", FormMethod.Post, new { id = "myForm" }))
         {
             <div class="form-group">
                 @Html.TextBoxFor(m => m.nombre, new { @class = "form-control form-control-user", @placeholder = "Nombre", @required = "true" })
@@ -20,9 +20,9 @@
                 @Html.TextBoxFor(m => m.correo_electronico, new { @class = "form-control form-control-user", @placeholder = "Correo", @required = "true" })
             </div>
             <div class="form-group">
-                @Html.PasswordFor(m => m.contrasena, new { @class = "form-control form-control-user", @placeholder = "Contraseña",  @required = "true" })
+                @Html.PasswordFor(m => m.contrasena, new { @class = "form-control form-control-user", @placeholder = "Contraseña", @required = "true", @maxlength = "10" })
             </div>
-            
+
 
             <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar">
         }
@@ -31,6 +31,5 @@
         <a href=""> <span class="text-primary">@Html.ActionLink("Iniciar Sesión", "InicioSesion", "Inicio", new { area = "" }, new { @class = "nav-link" })</span></a>
     </div>
 </div>
-
 
 
